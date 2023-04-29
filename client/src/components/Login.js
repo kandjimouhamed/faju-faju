@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Loader } from '@mantine/core';
 import logo from '../assets/img/illustration-2.png'
 import { Link, useNavigate } from 'react-router-dom';
-import GoogleButton from './GoogleButton';
+// import GoogleButton from './GoogleButton';
 import instance from '../axios/globalInstance'
 import {useDispatch} from 'react-redux'
 import { addUser } from '../redux/slices/userSlice';
