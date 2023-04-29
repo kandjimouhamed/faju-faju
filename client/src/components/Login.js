@@ -7,7 +7,6 @@ import GoogleButton from './GoogleButton';
 import instance from '../axios/globalInstance'
 import {useDispatch} from 'react-redux'
 import { addUser } from '../redux/slices/userSlice';
-import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate()
