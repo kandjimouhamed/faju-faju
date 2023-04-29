@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Welcome Email</title>
+    <style>
+        p {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="border: 1px solid white; line-height: 30px; padding: 1rem 0.5rem; min-height: 50vh">
+        <img src="cid:illustration" alt="Gestion rendez-vous" style="width: 250px; display: block; margin: auto">
+        <h1>Bonjour {{name}}! </h1>
+        <p>Votre rendez-vous prévu pour le {{day}}, de {{interval}}, à été {{status}} </p>
+        {{#if motif}}
+            <p>Motif : {{motif}}. </p>
+        {{/if}}
+    </div>
+</body>
+
+</html>
