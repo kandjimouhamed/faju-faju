@@ -2,7 +2,6 @@ const UserModel = require('../model/UserModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('../config/auth')
-const axios = require('axios')
 require("dotenv").config();
 const BusyModel = require('../model/busyTimeModel')
 
