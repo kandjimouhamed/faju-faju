@@ -9,43 +9,7 @@ const BusyModel = require('../model/busyTimeModel')
 // @desc: dignup
 // @route: /api/signup
 const signup = async (req, res) => {
-    // if (req.body.googleAccessToken) {
-    //     axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-    //         headers: {
-    //             "Authorization": `Bearer ${req.body.googleAccessToken}`
-    //         }
-    //     })
-    //         .then(async (response) => {
-    //             // console.log(response);
-    //             const firstname = response.data.given_name
-    //             const lastname = response.data.family_name
-    //             const email = response.data.email
-
-    //             const findUser = await UserModel.findOne({ email })
-
-    //             if (findUser) {
-    //                 const token = generateToken(result._id)
-    //                 res.json(token)
-    //                 return
-    //             }
-
-    //             const result = await UserModel.create({
-    //                 firstname,
-    //                 lastname,
-    //                 email,
-    //                 role: 'client',
-    //                 phone: null,
-    //                 password: null
-    //             })
-
-    //             const token = generateToken(result._id)
-    //             res.json(token)
-    //         })
-    //         .catch(error => {
-    //             res.status(400).json(error)
-    //         })
-    // }
-    // else {
+   
         const user = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
@@ -90,39 +54,7 @@ const getUser = (req, res) => {
 // @desc: login
 // @route: /api/login
 const login = async (req, res) => {
-    // if (req.body.googleAccessToken) {
-    //     axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-    //         headers: {
-    //             "Authorization": `Bearer ${req.body.googleAccessToken}`
-    //         }
-    //     })
-    //         .then(async (response) => {
-    //             const firstname = response.data.given_name
-    //             const lastname = response.data.family_name
-    //             const email = response.data.email
-
-    //             const findUser = await UserModel.findOne({ email })
-
-    //             if (!findUser) {
-    //                 const result = await UserModel.create({
-    //                     firstname,
-    //                     lastname,
-    //                     email,
-    //                     role: 'client',
-    //                     phone: null,
-    //                     password: null
-    //                 })
-    
-    //                 const token = generateToken(result._id)
-    //                 res.json(token)
-    //                 return
-    //             }
-
-    //             const token = generateToken(findUser._id)
-    //             res.json(token)
-    //         })
-    // }
-    // else {
+   
         const { email, password } = req.body
         console.log(email, password)
         const user = await UserModel.find({ email })

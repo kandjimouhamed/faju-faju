@@ -1,5 +1,4 @@
 const express = require('express')
-// const passport = require('passport')
 const { signup, login, getUser, logout, getUsers, editUser } = require('../controllers/UserControllers')
 const protect = require('../middleware/authMiddleware')
 const router = express.Router()
