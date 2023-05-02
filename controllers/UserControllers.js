@@ -9,7 +9,7 @@ const BusyModel = require('../model/busyTimeModel')
 // @desc: dignup
 // @route: /api/signup
 const signup = async (req, res) => {
-    console.log(res.sendStatus(401));
+    // console.log(res.sendStatus(401));
         const user = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
@@ -35,8 +35,8 @@ const signup = async (req, res) => {
             const createdUser = await UserModel.create({ ...user, password: hashedPassword })
             res.status(200).json({
                 // 'res':user,
-                'message': "l'inscription est reuissie"
-                // token: generateToken(createdUser._id)
+                // 'message': "l'inscription est reuissie",
+                token: generateToken(createdUser._id)
             })
         }
         catch (err) {

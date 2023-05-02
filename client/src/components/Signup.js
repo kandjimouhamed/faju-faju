@@ -5,7 +5,7 @@ import logo from '../assets/img/illustration-2.png'
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleButton from './GoogleButton';
 import instance from '../axios/globalInstance'
-import axios from 'axios';
+// import axios from 'axios';
 
 const Signup = () => {
     const navigate = useNavigate()
@@ -45,16 +45,18 @@ const Signup = () => {
 
         setLoading(true)
         try {
-            // await instance.post(url, data)
+            await instance.post(url, data)
+            navigate('/login')
           
-            await axios.post('http://localhost:5550/api/signup', data)
-                .then(response => {
-                    console.log(response)
-                    navigate('/login')
-                })
-                .catch(error => {
-                    console.log(error)
-                     });
+        //     await axios.post('http://localhost:5550/api/signup', data)
+        //         .then(response => {
+        //             console.log(response)
+        //             navigate('/login')
+        //         })
+        //         .catch(error => {
+        //             console.log(error)
+        //              });
+        // }
         }
         catch (err) {
             form.setErrors({ email: err.response.data.error })
