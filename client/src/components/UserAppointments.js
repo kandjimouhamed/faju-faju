@@ -32,8 +32,10 @@ const UserAppointments = () => {
     <div>
       {!allUnAppointments.loading ? (
         appointments
-          ?.filter((appointment) => appointment.userId === user._id).length !==
-          0 ? (
+          // ?.filter((appointment) => appointment.userId === user._id).length !==
+          // 0 
+          ?
+           (
           <>
             <h1 style={{ marginBottom: "1rem" }}>Mes rendez-vous</h1>
             <div className="table-container">
@@ -78,13 +80,13 @@ const UserAppointments = () => {
                     <span className="t-left">Description</span>
                     <span>Date</span>
                   </li>
-                  {
-                    appointments
+                  {/* {
+                    appointments? 
                       ?.filter((appointment) => appointment.isConfirmed === show)
                       .filter((appointment) => appointment.userId === user._id).length !== 0 ? appointments
                         ?.filter((appointment) => appointment.isConfirmed === show)
                         .filter((appointment) => appointment.userId === user._id)
-                        .map((appointment) => (
+                      appointments.map((appointment) => (
                           <List
                             SetAppointmentId={SetAppointmentId}
                             show={show}
@@ -98,7 +100,7 @@ const UserAppointments = () => {
                             }}
                           />
                         )) : <p style={{marginTop: '0.5rem'}}>{show ? "Pas de rendez-vous confirmé" : "Pas de rendez-vous annulé"}</p>
-                  }
+                  } */}
                 </ul>
               </div>
             </div>

@@ -5,6 +5,7 @@ const router = express.Router()
 
 function isLoggedIn(req, res, next){
     req.user ? next() : res.sendStatus(401)
+
 }
 
 router.post('/signup', signup)
@@ -14,7 +15,6 @@ router.get('/user', protect, getUser)
 // router.get('/user', getUser)
 router.get('/users', getUsers)
 router.put('/users/:id', editUser)
-
 
 
 module.exports = router

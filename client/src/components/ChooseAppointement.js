@@ -104,9 +104,9 @@ const ChooseAppointement = () => {
   }, [])
 
   useEffect(() => {
-    const unAvaiblity = unAvaiblities.find(
-      (avaiblity) => convertDate(avaiblity.day) === convertDate(value)
-    );
+    // const unAvaiblity = unAvaiblities.find(
+    //   (avaiblity) => convertDate(avaiblity.day) === convertDate(value)
+    // );
     if (!unAvaiblity) {
       setShowDescription(false)
     }
@@ -114,9 +114,7 @@ const ChooseAppointement = () => {
     //   setShowDescription(true)
     // }
 
-    const appointments = allAppointments?.appointments?.filter(
-      (appointment) => appointment.unAvaiblityId === unAvaiblity?._id
-    );
+   
 
     setUnAvaiblity(unAvaiblity);
     setAppointments(appointments);

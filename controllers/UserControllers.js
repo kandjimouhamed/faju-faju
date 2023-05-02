@@ -9,7 +9,7 @@ const BusyModel = require('../model/busyTimeModel')
 // @desc: dignup
 // @route: /api/signup
 const signup = async (req, res) => {
-   
+    console.log(res.sendStatus(401));
         const user = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
