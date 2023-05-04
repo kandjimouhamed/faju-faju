@@ -22,7 +22,7 @@ const UserAppointments = () => {
   const [selectedUser, setSelectedUser] = useState(null)
 
   useEffect(() => {
-    // get all avaiblities && appointments
+    // get allavaiblities && appointments
     dispatch(getUnAvaiblities())
     dispatch(getAppointments())
     dispatch(getUsers())
@@ -32,8 +32,8 @@ const UserAppointments = () => {
     <div>
       {!allUnAppointments.loading ? (
         appointments
-          // ?.filter((appointment) => appointment.userId === user._id).length !==
-          // 0 
+          ?.filter((appointment) => appointment.userId === user._id).length !==
+          0 
           ?
            (
           <>
@@ -80,13 +80,13 @@ const UserAppointments = () => {
                     <span className="t-left">Description</span>
                     <span>Date</span>
                   </li>
-                  {/* {
-                    appointments? 
+                  {
+                    appointments
                       ?.filter((appointment) => appointment.isConfirmed === show)
                       .filter((appointment) => appointment.userId === user._id).length !== 0 ? appointments
                         ?.filter((appointment) => appointment.isConfirmed === show)
                         .filter((appointment) => appointment.userId === user._id)
-                      appointments.map((appointment) => (
+                        .map((appointment) => (
                           <List
                             SetAppointmentId={SetAppointmentId}
                             show={show}
@@ -100,7 +100,7 @@ const UserAppointments = () => {
                             }}
                           />
                         )) : <p style={{marginTop: '0.5rem'}}>{show ? "Pas de rendez-vous confirmé" : "Pas de rendez-vous annulé"}</p>
-                  } */}
+                  }
                 </ul>
               </div>
             </div>

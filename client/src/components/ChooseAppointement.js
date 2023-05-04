@@ -22,6 +22,8 @@ const ChooseAppointement = () => {
   const unAvaiblities = useSelector((state) => state.unavaiblities.data);
   const [unAvaiblity, setUnAvaiblity] = useState(null);
   const allAppointments = useSelector((state) => state.appointments);
+  // console.log(allAppointments.length);
+  // console.log(unAvaiblity);
   const userId = user._id;
   const [appointments, setAppointments] = useState([]);
   const form = useForm({
@@ -104,15 +106,15 @@ const ChooseAppointement = () => {
   }, [])
 
   useEffect(() => {
-    // const unAvaiblity = unAvaiblities.find(
-    //   (avaiblity) => convertDate(avaiblity.day) === convertDate(value)
-    // );
+    const unAvaiblity = unAvaiblities.find(
+      (avaiblity) => convertDate(avaiblity.day) === convertDate(value)
+    );
     if (!unAvaiblity) {
       setShowDescription(false)
     }
-    // else {
-    //   setShowDescription(true)
-    // }
+    else {
+      setShowDescription(true)
+    }
 
    
 
@@ -171,9 +173,9 @@ const ChooseAppointement = () => {
             Choisissez l'heure qui vous convient
           </span>
           <span></span>
-          {!allAppointments.loading ? (
-            appointments?.length !== 0 ? (
-              appointments?.map((appointment, index) => (
+          {!allAppointments.loading  ? (
+            allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (
+              allAppointments.appointments?.map((appointment, index) => (
                 <button
                   id={appointment._id}
                   title={

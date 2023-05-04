@@ -26,18 +26,18 @@ const Appointement = () => {
   const allAvaiblities = useSelector((state) => state.unavaiblities);
   const unAvaiblities = allAvaiblities?.data;
   const allAppointments = useSelector((state) => state.appointments);
-  const [appointments, setAppointments] = useState([])
-  // const [appointments, setAppointments] = useState(allAppointments?.appointments
-  //   ?.filter(appointment => appointment.userId !== null)
-  //   .map((appointment) => {
-  //     const data = unAvaiblities?.find(
-  //       (avaiblity) => avaiblity._id === appointment.unAvaiblityId
-  //     );
-  //     // if (convertDate(data?.day) === today) {
-  //     //   return(appointment);
-  //     // }
-  //     return convertDate(data?.day) === today ? appointment : null;
-  //   }))
+  // const [appointments, setAppointments] = useState([])
+  const [appointments, setAppointments] = useState(allAppointments?.appointments
+    ?.filter(appointment => appointment.userId !== null)
+    .map((appointment) => {
+      const data = unAvaiblities?.find(
+        (avaiblity) => avaiblity._id === appointment.unAvaiblityId
+      );
+      if (convertDate(data?.day) === today) {
+        return(appointment);
+      }
+      return convertDate(data?.day) === today ? appointment : null;
+    }))
   const isValidDate = [];
   const [id, setId] = useState(null)
   const [opened, setOpened] = useState(false)
@@ -242,7 +242,7 @@ const Appointement = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {
+                  {
                   allAppointments?.appointments?.filter(appointment => appointment.userId !== null)
                     .filter(appointment => {
                       if (isActive === 'today') {
@@ -393,7 +393,7 @@ const Appointement = () => {
                                 : null}
                       </td>
                     </tr>
-                  )} */}
+                  )}
                 </tbody>
               </Table>
               <Modal

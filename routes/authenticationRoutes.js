@@ -12,7 +12,6 @@ router.post('/signup', signup)
 router.post('/login', login)
 router.get('/logout', logout)
 router.get('/user', protect, getUser)
-// router.get('/user', getUser)
 router.get('/users', getUsers)
 router.put('/users/:id', editUser)
 

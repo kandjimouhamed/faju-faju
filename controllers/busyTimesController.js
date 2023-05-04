@@ -5,6 +5,7 @@ const isValidTime = require('./utils/regexTime')
 const editBusyTimes = async (req, res) => {
     const id = req.params.id
     const {workStartAt, workEndAt, appointmentDuration, breakTime} = req.body
+    console.log(req.body);
     
     if(!workStartAt || !workEndAt){
         res.status(400).json({message: "Veuillez fournir des heures"})
