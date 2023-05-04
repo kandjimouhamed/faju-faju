@@ -12,6 +12,7 @@ const appointmentsSlice = createSlice({
     name: 'appointments',
     initialState,
     reducers: {
+        //choisir un rendex vous
         chooseAppointment: (state, {payload}) => {
             const appointment = state.appointments.find(appoint => appoint._id === payload.id)
             appointment.userId = payload.userId
@@ -19,16 +20,19 @@ const appointmentsSlice = createSlice({
 
             return state
         },
+        // valiser un rendez vous
         validateAppointment: (state, {payload}) => {
             state.appointments.find(appointment => appointment._id === payload).isConfirmed = true
 
             return state
         },
+        //supprimer un rendez vous
         cancelAppointment: (state, {payload}) => {
             state.appointments.find(appointment => appointment._id === payload).isConfirmed = false
 
             return state
         },
+        // initialiser le rendez vous
         clearAppointments: (state) => {
             state = initialState
             return state

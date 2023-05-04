@@ -14,30 +14,31 @@ const Dashboard = () => {
     const [performed, setPerformed] = useState([])
     const [canceled, setCanceled] = useState([])
     const [coming, setComing] = useState([])
-
     useEffect(() => {
+       
         const performed = []
         const coming = []
         // !nbre de rdv confirmer
-        // appointments
-        //     ?.filter(appointment => appointment.done === true)
-        //     .forEach(appointment => {
-        //         const unAvaiblity = unAvaiblities.find(avaiblity => avaiblity._id === appointment.unAvaiblityId)
-        //         if (convertDate(unAvaiblity?.day) < today) {
-        //             performed.push(unAvaiblity)
-        //         }
-        //     })
+        appointments
+            ?.filter(appointment => appointment.done === true)
+            .forEach(appointment => {
+                const unAvaiblity = unAvaiblities.find(avaiblity => avaiblity._id === appointment.unAvaiblityId)
+                if (convertDate(unAvaiblity?.day) < today) {
+                    performed.push(unAvaiblity)
+                }
+            })
         // !nbre de rdv annuler
-        // const canceled = appointments?.filter(appointment => appointment.isConfirmed === false)
+        // console.log(performed)
+        const canceled = appointments?.filter(appointment => appointment.isConfirmed === false)
         // !nbre de rdv a venir
-        // appointments
-        //     ?.filter(appointment => appointment.userId !== null)
-        //     .forEach(appointment => {
-        //         const unAvaiblity = unAvaiblities.find(avaiblity => avaiblity._id === appointment.unAvaiblityId)
-        //         if (convertDate(unAvaiblity?.day) > today) {
-        //             coming.push(unAvaiblity)
-        //         }
-        //     })
+        appointments
+            ?.filter(appointment => appointment.userId !== null)
+            .forEach(appointment => {
+                const unAvaiblity = unAvaiblities.find(avaiblity => avaiblity._id === appointment.unAvaiblityId)
+                if (convertDate(unAvaiblity?.day) > today) {
+                    coming.push(unAvaiblity)
+                }
+            })
         setPerformed(performed)
         setComing(coming)
         setCanceled(canceled)

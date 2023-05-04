@@ -22,29 +22,27 @@ const Appointement = () => {
   const [isActive, setIsActive] = useState("today");
   const allUsers = useSelector((state) => state.users);
   const users = allUsers.users;
-  // const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user)
   const allAvaiblities = useSelector((state) => state.unavaiblities);
   const unAvaiblities = allAvaiblities?.data;
   const allAppointments = useSelector((state) => state.appointments);
-  const [appointments, setAppointments] = useState([])
-  // const [appointments, setAppointments] = useState(allAppointments?.appointments
-  //   ?.filter(appointment => appointment.userId !== null)
-  //   .map((appointment) => {
-  //     const data = unAvaiblities?.find(
-  //       (avaiblity) => avaiblity._id === appointment.unAvaiblityId
-  //     );
-  //     // if (convertDate(data?.day) === today) {
-  //     //   return(appointment);
-  //     // }
-  //     return convertDate(data?.day) === today ? appointment : null;
-  //   }))
+  // const [appointments, setAppointments] = useState([])
+  const [appointments, setAppointments] = useState(allAppointments?.appointments
+    ?.filter(appointment => appointment.userId !== null)
+    .map((appointment) => {
+      const data = unAvaiblities?.find(
+        (avaiblity) => avaiblity._id === appointment.unAvaiblityId
+      );
+      if (convertDate(data?.day) === today) {
+        return(appointment);
+      }
+      return convertDate(data?.day) === today ? appointment : null;
+    }))
   const isValidDate = [];
   const [id, setId] = useState(null)
   const [opened, setOpened] = useState(false)
   const [motif, setMotif] = useState('')
-  // console.log(appointments );
-
-
+ 
   const [passedOrComingAppointments, setPassedOrComingAppointments] =
     useState(isValidDate);
 
@@ -177,8 +175,8 @@ const Appointement = () => {
       {!allAppointments.loading &&
         !allAvaiblities.loading
         ? (
-          allAppointments?.appointments ? (
-            // allAppointments?.appointments?.filter(appointment => appointment?.userId !== null).length !== 0 ? (
+          // allAppointments?.appointments ? (
+            allAppointments?.appointments?.filter(appointment => appointment?.userId !== null).length !== 0 ? (
             <>
               <div className="table-container--time">
                 <button
@@ -197,11 +195,11 @@ const Appointement = () => {
                       isActive === "today" ? "2px solid #DB3C4E" : null,
                     color: isActive === "today" ? "#DB3C4E" : null
                   }}
-                  onClick={() => setIsActive('today')}
+                   onClick={() => setIsActive('today')}
                 >
                   Aujourd'hui
                 </button>
-                {/* <button
+                <button
                 style={{
                   borderBottom:
                     isActive === "tomorrow" ? "2px solid #DB3C4E" : null,
@@ -210,7 +208,7 @@ const Appointement = () => {
                 onClick={tomorrowAppointments}
               >
                 Demain
-              </button> */}
+              </button>
                 <button
                   style={{
                     borderBottom:
@@ -242,7 +240,7 @@ const Appointement = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {
+                  {
                   allAppointments?.appointments?.filter(appointment => appointment.userId !== null)
                     .filter(appointment => {
                       if (isActive === 'today') {
@@ -393,7 +391,7 @@ const Appointement = () => {
                                 : null}
                       </td>
                     </tr>
-                  )} */}
+                  )}
                 </tbody>
               </Table>
               <Modal
