@@ -6,6 +6,8 @@ const authRoutes = require('./routes/authenticationRoutes')
 const unAvaiblityRoutes = require('./routes/unAvaiblityRoutes')
 const appointmentRoutes = require('./routes/appoinmentsRoutes')
 const busyTimeRoutes = require('./routes/busyTimesRoute')
+const arrangementRoutes = require('./routes/arrangementRoutes')
+
 const cors = require('cors')
 const connectToMongoDB = require('./config/db')
 // const passport = require('passport')
@@ -37,6 +39,7 @@ app.use('/api', authRoutes)
 app.use('/api', unAvaiblityRoutes)
 app.use('/api/appointments', appointmentRoutes)
 app.use('/api/busy-times', busyTimeRoutes)
+app.use('/api/ordonnance' , arrangementRoutes)
 
 // serve frontend
 if (process.env.NODE_ENV === 'production') {
