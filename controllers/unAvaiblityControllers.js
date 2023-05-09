@@ -245,7 +245,7 @@ const addAvaiblity = async (req, res) => {
             endedAt,
             description: "",
             isConfirmed: null,
-            done: false
+            done: false 
         });
 
         totalEndMinuties += BREAK;

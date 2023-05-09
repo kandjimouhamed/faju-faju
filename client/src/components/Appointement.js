@@ -19,13 +19,17 @@ import { btnStyle } from "../utils/linkStyle";
 const Appointement = () => {
   const dispatch = useDispatch();
   const today = getTodayDate();
+
   const [isActive, setIsActive] = useState("today");
   const allUsers = useSelector((state) => state.users);
   const users = allUsers.users;
   // const user = useSelector(state => state.user)
   const allAvaiblities = useSelector((state) => state.unavaiblities);
   const unAvaiblities = allAvaiblities?.data;
+  
+  
   const allAppointments = useSelector((state) => state.appointments);
+
   // const [appointments, setAppointments] = useState([])
   const [appointments, setAppointments] = useState(allAppointments?.appointments
     ?.filter(appointment => appointment.userId !== null)
@@ -165,7 +169,7 @@ const Appointement = () => {
       });
     setPassedOrComingAppointments(isValidDate);
   }
-
+  // console.log(allAppointments.appointments);
   useEffect(() => {
     dispatch(getAppointments());
     dispatch(getUnAvaiblities());
@@ -250,18 +254,21 @@ const Appointement = () => {
                           (avaiblity) => avaiblity._id === appointment.unAvaiblityId
                         );
                         return (convertDate(data.day) === today) && appointment
+                        
                       }
                       if (isActive === 'coming') {
                         const data = unAvaiblities?.find(
                           (avaiblity) => avaiblity._id === appointment.unAvaiblityId
                         );
                         return (convertDate(data.day) > today) && appointment
+                        
                       }
                       if (isActive === 'passed') {
                         const data = unAvaiblities?.find(
                           (avaiblity) => avaiblity._id === appointment.unAvaiblityId
                         );
-                        return (convertDate(data.day) < today) && appointment
+                        return (convertDate(data.day) < today) && appointment    
+                    
                       }
                       if (isActive === 'canceled') {
                         return appointment.isConfirmed === false

@@ -50,25 +50,25 @@ const CalendarUser = () => {
   const localizer = momentLocalizer(moment);
 
   useEffect(() => {
-    // const events = appointments
-      // ?.filter((appointment) => appointment.isConfirmed === true)
-      // .map((appointment) => {
-      //   const avaiblity = avaiblities.find(
-      //     (avaiblity) => avaiblity._id === appointment.unAvaiblityId
-      //   );
+    const events = appointments
+      ?.filter((appointment) => appointment.isConfirmed === true)
+      .map((appointment) => {
+        const avaiblity = avaiblities.find(
+          (avaiblity) => avaiblity._id === appointment.unAvaiblityId
+        );
 
-      //   const event = {
-      //     avaiblityId: avaiblity._id,
-      //     appointmentId: appointment._id,
-      //     title: appointment.description,
-      //     start: new Date(avaiblity.day),
-      //     end: new Date(avaiblity.day),
-      //     time: { startedAt: appointment.startedAt, endedAt: appointment.endedAt },
-      //     takenBy: appointment.userId,
-      //     duration: avaiblity.duration
-      //   };
-      //   return event;
-      // });
+        const event = {
+          avaiblityId: avaiblity._id,
+          appointmentId: appointment._id,
+          title: appointment.description,
+          start: new Date(avaiblity.day),
+          end: new Date(avaiblity.day),
+          time: { startedAt: appointment.startedAt, endedAt: appointment.endedAt },
+          takenBy: appointment.userId,
+          duration: avaiblity.duration
+        };
+        return event;
+      });
     setEventsData(events);
   }, [allAvaiblities.loading, avaiblities, appointments]);
 

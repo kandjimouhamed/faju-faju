@@ -19,6 +19,8 @@ const DetailsAppointment = ({ opened, setOpened, firstname, lastname, appointmen
     const dispatch = useDispatch()
     const today = getTodayDate()
 
+    console.log(unAvaiblity);
+
     const cancel = async (id) => {
         // update dans redux
         dispatch(cancelAppointment(id))

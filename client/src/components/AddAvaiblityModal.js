@@ -127,7 +127,7 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
 
         dispatch(addUnAvaiblity(unAvaiblity))
             .then(res => {
-                
+                console.log(res);
                 if (res.type === "unavaiblities/addUnAvaiblity/rejected") {
                     setError(true)
                     if(res.payload.data){

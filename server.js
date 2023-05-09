@@ -6,10 +6,12 @@ const authRoutes = require('./routes/authenticationRoutes')
 const unAvaiblityRoutes = require('./routes/unAvaiblityRoutes')
 const appointmentRoutes = require('./routes/appoinmentsRoutes')
 const busyTimeRoutes = require('./routes/busyTimesRoute')
-const arrangementRoutes = require('./routes/arrangementRoutes')
+const prescriptionRoutes = require('./routes/prescriptionRoutes')
+
 
 const cors = require('cors')
 const connectToMongoDB = require('./config/db')
+const { getPrescriptions } = require('./controllers/prescriptionsControllers')
 // const passport = require('passport')
 
 const app = express()
@@ -39,7 +41,7 @@ app.use('/api', authRoutes)
 app.use('/api', unAvaiblityRoutes)
 app.use('/api/appointments', appointmentRoutes)
 app.use('/api/busy-times', busyTimeRoutes)
-app.use('/api/ordonnance' , arrangementRoutes)
+app.use('/api/prescription' , prescriptionRoutes )
 
 // serve frontend
 if (process.env.NODE_ENV === 'production') {
@@ -48,8 +50,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './', 'client', 'build', 'index.html'))
   })
-}
-else{
+} else {
   app.get('/', (req, res) => {
     res.send("Please set to production")
   })
