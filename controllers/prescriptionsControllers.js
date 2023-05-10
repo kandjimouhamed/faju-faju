@@ -31,9 +31,8 @@ const postPrescription = async (req , res) => {
 
 
 const updatePrescription = async (req , res) => {
-    const idPrescription = req.params.id
     const { patientId , description} = req.body;
-    console.log(req.body , 'update');
+
 
     const findPrescription = await prescriptionModel.findById(req.params.id)
     if(!findPrescription) return res.status(404).json("La prescription est introuvable")
@@ -52,4 +51,20 @@ const updatePrescription = async (req , res) => {
 
 }
 
-module.exports = {getPrescriptions , postPrescription , updatePrescription}
+
+
+const deletePrescription = async (req , res) => {
+    const idPrescription = await prescriptionModel.findById(req.params.id)
+    if(!idPrescription) return res.status(404).json({message : "Prescription introuvable."})
+
+    try {
+        const prescription = await prescriptionModel.findByIdAndDelete(req.params.id)
+        return res.status(200).json({data : prescription , message : 'Prescription supprimée avec success.'})
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({message : error.message})
+    }
+}
+
+
+module.exports = { getPrescriptions , postPrescription , updatePrescription , deletePrescription }
