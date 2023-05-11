@@ -13,14 +13,22 @@ const getPrescriptions = async (req , res) => {
 
 const postPrescription = async (req , res) => {
     const userId = req.params.id
-    const {patientId , description } = req.body
-    console.log(req.body , 'Post');
+    
 
-    // const user = await UserModel.findById(userId)
-    // if(!user) res.status(404).json({message : "L'utilisateur est introuvable."})
+    const {patientId  , description } = req.body
+    console.log(req.params.id , 'Post');
+    console.log(userId, 'id');
+
+    // ! Verifier si utilisateur qui a effectué la requéte existe
+    const user = await UserModel.findById(userId)
+    if(!user) res.status(404).json({message : "L'utilisateur est introuvable."})
 
     try {
-            const prescription = await prescriptionModel.create({ patientId , userId : '645a3000118d102b4fec2fcc' ,description })
+            const prescription = await prescriptionModel.create({
+                patientId ,
+                userId ,
+                description
+            })
             return res.json({data : prescription , message : 'Prescription ajoutée avec success.' } )
     } catch (error) {
         console.log(error);
@@ -32,7 +40,7 @@ const postPrescription = async (req , res) => {
 
 const updatePrescription = async (req , res) => {
     const { patientId , description} = req.body;
-
+    const userId = req.params.id
 
     const findPrescription = await prescriptionModel.findById(req.params.id)
     if(!findPrescription) return res.status(404).json("La prescription est introuvable")
@@ -40,7 +48,7 @@ const updatePrescription = async (req , res) => {
     try {
         const prescription = await prescriptionModel.findByIdAndUpdate(
             req.params.id , 
-            { patientId, userId : '645a3000118d102b4fec2fcc', description },
+            { patientId, userId , description },
             { new : true }
         );
         return res.status(200).json({data : prescription , message : 'Prescription modifié avec success.'})

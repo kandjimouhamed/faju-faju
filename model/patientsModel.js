@@ -48,6 +48,6 @@ const patientsModel = mongoose.Schema({
       },
 })
 
-const PatientModel = mongoose.model("patient" , patientsModel)
+const PatientModel = mongoose.model("Patient" , patientsModel)
 
 module.exports = PatientModel

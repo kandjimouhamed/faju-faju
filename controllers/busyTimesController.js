@@ -5,7 +5,6 @@ const isValidTime = require('./utils/regexTime')
 const editBusyTimes = async (req, res) => {
     const id = req.params.id
     const {workStartAt, workEndAt, appointmentDuration, breakTime} = req.body
-    console.log(req.body);
     
     if(!workStartAt || !workEndAt){
         res.status(400).json({message: "Veuillez fournir des heures"})
@@ -38,6 +37,7 @@ const editBusyTimes = async (req, res) => {
         res.status(404).json({message: "Utilisateur introuvable"})
         return
     }
+    console.log(req.params.id , 'id user');
 
     const findBusyTimes = await BusyModel.findOne({"userId": id})
     
