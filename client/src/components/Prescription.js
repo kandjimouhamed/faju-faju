@@ -12,13 +12,21 @@ export default function Prescription() {
     const [ouvre , setOuvre] = useState(false)
     const dispatch = useDispatch()
     const prescriptions = useSelector((state) => state.prescription)
-
-
-    useEffect(() => {
-      dispatch(getPrescription())
-    },[])
-
+    const [id , setId] = useState(null)
     
+    
+    
+    useEffect(() => {
+      console.log(prescriptions);
+      dispatch(getPrescription())
+    },[dispatch])
+
+
+    // const handleDelete = (id) => {
+    //   dispatch(deletePrescription(id))
+    //   setOuvre(false)
+    // }
+
   return (
     <div className='table-container'>
       <h1>Prescription</h1>
@@ -35,15 +43,16 @@ export default function Prescription() {
       <Table>
       <thead>
         <tr>
-          <th>Element position</th>
-          <th>Element name</th>
-          <th>Symbol</th>
-          <th>Atomic mass</th>
+          <th>Prénom patient</th>
+          <th>Nom patient</th>
+          <th>Numéro téléphone</th>
+          <th>Prescription</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {
-          prescriptions?.data?.data.map(({ description , _id , patientId}) => (
+          prescriptions?.data.map(({ description , _id , patientId}) => (
             <tr key={_id}>
               <td>{patientId.firstname}</td>
               <td>{patientId.lastname}</td>
@@ -51,16 +60,11 @@ export default function Prescription() {
               <td dangerouslySetInnerHTML={{__html : description}}/>
               <td>
                 <AiOutlineDelete
-                  onClick={() => setOuvre((open) => !open)}
+                  onClick={() => {
+                    setOuvre((open) => !open)
+                    setId(_id)
+                  }}
                 />
-                {
-                  ouvre && <ModalConfirm  
-                  setOuvre={setOuvre} 
-                  ouvre={ouvre} 
-                  title={'Confirmer la suppréssion'} 
-                  // handleDelete={handleDelete}
-                  id={_id} />
-                }
               </td>
             </tr>
           ))  
@@ -68,6 +72,14 @@ export default function Prescription() {
 
       </tbody>
     </Table>
+        {
+          ouvre && <ModalConfirm  
+          setOuvre={setOuvre} 
+          ouvre={ouvre}
+          title={'Confirmer la suppréssion'} 
+          // handleDelete={handleDelete}
+          id={id} />
+        }
       </div>
     </div>
   )

@@ -29,7 +29,7 @@ const getPrescription = createAsyncThunk(
 
 const deletePrescription = createAsyncThunk(
     'prescription/deletePrescription',
-    async (id , {rejectWithValue}) => {
+    async (id,{rejectWithValue}) => {
         try {
             const {data} = await instance.delete(`/prescription/${id}`)
             return data

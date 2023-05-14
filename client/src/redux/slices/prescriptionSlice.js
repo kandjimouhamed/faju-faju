@@ -22,11 +22,12 @@ const prescriptionSlice = createSlice({
             }
         },
         [addPrescription.fulfilled] : (state , {payload}) => {
+            
             return {
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload
+                data : [...state.data , payload.data ]
             }
         },
         [addPrescription.rejected] : (state , {payload}) => {
@@ -49,7 +50,7 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload
+                data : payload.data
             }
         },
         [getPrescription.rejected] : (state , {payload}) => {
@@ -57,7 +58,7 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload.data
             }
         },
         [deletePrescription.pending] : (state , action) => {
@@ -67,11 +68,12 @@ const prescriptionSlice = createSlice({
             }
         },
         [deletePrescription.fulfilled] : (state , {payload}) => {
+            const deleteItem = state.data.filter((data) => data._id !== payload.data._id)
             return {
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload
+                data : deleteItem
             }
         },
         [deletePrescription.rejected] : (state , {payload}) => {
@@ -79,7 +81,7 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload.data
             }
         },
 

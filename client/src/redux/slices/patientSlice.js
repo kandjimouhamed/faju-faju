@@ -25,7 +25,7 @@ const patientSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload
+                data : payload.data
             }
         },
 

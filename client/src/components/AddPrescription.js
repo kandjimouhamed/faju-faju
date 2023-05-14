@@ -6,6 +6,7 @@ import { getPatients } from '../redux/services/patientService';
 import ReactQuill from 'react-quill'
 import { btnStyle } from '../utils/linkStyle';
 import { addPrescription } from '../redux/services/prescriptionService';
+import { set } from 'mongoose';
 
 
 const useStyles = createStyles((theme) => ({
@@ -39,12 +40,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-function AddPrescription({opened, setOpened}) {
-  const [patientId , setPatientId] = useState(null)
-  const [description , setDescription] = useState('')
-  const currentUser = useSelector(state => state.user)
-  const prescription = useSelector(state => state.prescription)
 
+function AddPrescription({opened, setOpened}) {
 
   const modules = {
     toolbar : [
@@ -61,30 +58,43 @@ function AddPrescription({opened, setOpened}) {
       ["link" , "image" , "video"]
     ]
   }
-
+  
   const {classes} = useStyles()
   const dispatch = useDispatch()
-  const patients = useSelector((state) => state.patients?.data?.data)
+  const [patientId , setPatientId] = useState()
+  const [description , setDescription] = useState('')
+  const currentUser = useSelector(state => state.user)
+  const prescription = useSelector(state => state.prescription?.data)
+
+  const patients = useSelector((state) => state.patients?.data)
 
   useEffect(() => {
     dispatch(getPatients())
-  },[])
+  },[dispatch])
 
-console.log(patientId);
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    const prescription = {
+    const newPrescription = {
       patientId : patientId ,
       userId : currentUser._id,
       description : description
     }
-    dispatch(addPrescription(prescription))
+    
+    dispatch(addPrescription(newPrescription))
+    .then((res) => {
+      setPatientId("")
+      setDescription("")
+      setOpened(false)
+      if(res.type === 'prescription/getPrescription/fulfilled') {
+        setOpened(false)
+        
+      }
+    }) .catch((error) => {
+      console.log('error' , error);
+    })
   }
 
-  // ! deletePrescription
-  const deletePrescription = () => {
-    
-  }
 
   return (
     <div>
@@ -99,7 +109,7 @@ console.log(patientId);
     <form onSubmit={handleSubmit}>
       <Input.Wrapper id={'3'} label="Selectionnez un patient" required maw={320} mx="auto">
         <Input component="select" value={patientId} onChange={(e) => setPatientId(e.target.value)} rightSection={<IconChevronDown size={14} stroke={1.5} />}>
-            <option>default</option>
+            <option value=''>default</option>
             {
               patients && patients.map(({_id , firstname , lastname}) => (
                 <option key={_id} value={_id}>{firstname} {lastname}</option>
