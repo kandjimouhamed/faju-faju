@@ -6,10 +6,13 @@ const authRoutes = require('./routes/authenticationRoutes')
 const unAvaiblityRoutes = require('./routes/unAvaiblityRoutes')
 const appointmentRoutes = require('./routes/appoinmentsRoutes')
 const busyTimeRoutes = require('./routes/busyTimesRoute')
+<<<<<<< HEAD
 const prescriptionRoutes = require('./routes/prescriptionRoutes')
 const patientsRoutes = require('./routes/patientsRoutes')
 
 
+=======
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
 const cors = require('cors')
 const connectToMongoDB = require('./config/db')
 const { getPrescriptions } = require('./controllers/prescriptionsControllers')
@@ -42,8 +45,11 @@ app.use('/api', authRoutes)
 app.use('/api', unAvaiblityRoutes)
 app.use('/api/appointments', appointmentRoutes)
 app.use('/api/busy-times', busyTimeRoutes)
+<<<<<<< HEAD
 app.use('/api/prescription' , prescriptionRoutes )
 app.use('/api/patient' , patientsRoutes)
+=======
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
 
 // serve frontend
 if (process.env.NODE_ENV === 'production') {

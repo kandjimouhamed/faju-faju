@@ -23,13 +23,16 @@ const Appointement = () => {
   const [isActive, setIsActive] = useState("today");
   const allUsers = useSelector((state) => state.users);
   const users = allUsers.users;
-  // const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user)
   const allAvaiblities = useSelector((state) => state.unavaiblities);
   const unAvaiblities = allAvaiblities?.data;
   
   
   const allAppointments = useSelector((state) => state.appointments);
+<<<<<<< HEAD
 
+=======
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
   // const [appointments, setAppointments] = useState([])
   const [appointments, setAppointments] = useState(allAppointments?.appointments
     ?.filter(appointment => appointment.userId !== null)
@@ -46,9 +49,7 @@ const Appointement = () => {
   const [id, setId] = useState(null)
   const [opened, setOpened] = useState(false)
   const [motif, setMotif] = useState('')
-  // console.log(appointments );
-
-
+ 
   const [passedOrComingAppointments, setPassedOrComingAppointments] =
     useState(isValidDate);
 
@@ -181,8 +182,8 @@ const Appointement = () => {
       {!allAppointments.loading &&
         !allAvaiblities.loading
         ? (
-          allAppointments?.appointments ? (
-            // allAppointments?.appointments?.filter(appointment => appointment?.userId !== null).length !== 0 ? (
+          // allAppointments?.appointments ? (
+            allAppointments?.appointments?.filter(appointment => appointment?.userId !== null).length !== 0 ? (
             <>
               <div className="table-container--time">
                 <button
@@ -201,11 +202,11 @@ const Appointement = () => {
                       isActive === "today" ? "2px solid #DB3C4E" : null,
                     color: isActive === "today" ? "#DB3C4E" : null
                   }}
-                  onClick={() => setIsActive('today')}
+                   onClick={() => setIsActive('today')}
                 >
                   Aujourd'hui
                 </button>
-                {/* <button
+                <button
                 style={{
                   borderBottom:
                     isActive === "tomorrow" ? "2px solid #DB3C4E" : null,
@@ -214,7 +215,7 @@ const Appointement = () => {
                 onClick={tomorrowAppointments}
               >
                 Demain
-              </button> */}
+              </button>
                 <button
                   style={{
                     borderBottom:

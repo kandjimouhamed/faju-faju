@@ -22,8 +22,12 @@ const ChooseAppointement = () => {
   const unAvaiblities = useSelector((state) => state.unavaiblities.data);
   const [unAvaiblity, setUnAvaiblity] = useState(null);
   const allAppointments = useSelector((state) => state.appointments);
+<<<<<<< HEAD
 
 
+=======
+  console.log(allAppointments.loading)
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
   const userId = user._id;
   const [appointments, setAppointments] = useState([]);
   const form = useForm({
@@ -104,6 +108,7 @@ const ChooseAppointement = () => {
     dispatch(getUnAvaiblities())
     dispatch(getAppointments())
     dispatch(getUsers())
+    console.log(dispatch(getAppointments()))
   }, [])
 
   useEffect(() => {
@@ -116,6 +121,10 @@ const ChooseAppointement = () => {
     else {
       setShowDescription(true)
     }
+<<<<<<< HEAD
+=======
+    // console.log(unAvaiblities)
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
 
    
 
@@ -178,10 +187,16 @@ const ChooseAppointement = () => {
             Choisissez l'heure qui vous convient
           </span>
           <span></span>
+<<<<<<< HEAD
           {!allAppointments.loading  ? (
             allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (          
               allAppointments.appointments?.map((appointment, index) => (
 
+=======
+          {!allAppointments.loading ? (
+            allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (
+            allAppointments.appointments?.map((appointment, index) => (
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
                 <button
                   id={appointment._id}
                   title={

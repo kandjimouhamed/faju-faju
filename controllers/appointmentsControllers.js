@@ -5,6 +5,7 @@ const UnAvaiblityModel = require('../model/unAvaiblityModel')
 const hbs = require('nodemailer-express-handlebars')
 const path = require('path')
 const formatLocalDate = require('./utils/formatLocalDate')
+const { log } = require('console')
 
 // point to the template folder
 const handlebarOptions = {
@@ -18,7 +19,6 @@ const handlebarOptions = {
 
 const getAppointments = async (req, res) => {
     const appointments = await AppointmentModel.find()
-
     res.json(appointments)
 }
 

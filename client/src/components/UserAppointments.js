@@ -34,9 +34,13 @@ const UserAppointments = () => {
       {!allUnAppointments.loading ? (
         appointments
           ?.filter((appointment) => appointment.userId === user._id).length !==
+<<<<<<< HEAD
           0 
           ?
            (
+=======
+          0 ? (
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
           <>
             <h1 style={{ marginBottom: "1rem" }}>Mes rendez-vous</h1>
             <div className="table-container">

@@ -4,7 +4,11 @@ const AppointmentModel = require("../model/appointmentModel");
 
 const addAvaiblity = async (req, res) => {
     const { day, time, motif, duration, breakBetweenAppoints } = req.body;
+<<<<<<< HEAD
     // console.log(req.body);
+=======
+    console.log(req.body)
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
 
     if (!day || !time) {
         res
@@ -260,7 +264,10 @@ const addAvaiblity = async (req, res) => {
     res.json(createdAvaiblity);
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f96091c (stabiliser la partie client et la partie admin)
 const getAvaiblities = async (req, res) => {
     const avaiblities = await UnAvaiblityModel.find();
     res.json(avaiblities);
