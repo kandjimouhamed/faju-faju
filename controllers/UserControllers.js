@@ -115,6 +115,16 @@ const generateToken = (userId) => {
     return jwt.sign({ userId }, 'kkxsjgshgsyudyusydhsgfdybufdh-r', { expiresIn: '30d' })
 }
 
+const getPatient = async (req , res) => {
+    try {
+        const patient = await UserModel.find({ role: 'client' }).select("-password")
+        return res.status(200).json({data : patient , message : 'success'})
+    } catch (error)  {
+        console.log(error);
+        return res.status(500).json({message : error.message})
+    }
+}
+
 module.exports = {
     login,
     signup,
@@ -122,4 +132,5 @@ module.exports = {
     logout,
     getUsers,
     editUser,
+    getPatient
 }

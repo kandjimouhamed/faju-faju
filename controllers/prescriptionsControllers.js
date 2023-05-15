@@ -3,7 +3,7 @@ const UserModel = require('../model/UserModel')
 
 const getPrescriptions = async (req , res) => {
     try {
-        const prescription = await prescriptionModel.find()
+        const prescription = await prescriptionModel.find().select("-password").populate('patientId');
         return res.json({data : prescription , message : "Prescription récupérer avec success ."})
     } catch (error) {
         console.log(error);
@@ -12,12 +12,9 @@ const getPrescriptions = async (req , res) => {
 }
 
 const postPrescription = async (req , res) => {
-    const userId = req.params.id
-    
+    // const userId = req.params.id
+    const {patientId  , userId , description } = req.body
 
-    const {patientId  , description } = req.body
-    console.log(req.params.id , 'Post');
-    console.log(userId, 'id');
 
     // ! Verifier si utilisateur qui a effectué la requéte existe
     const user = await UserModel.findById(userId)

@@ -1,12 +1,12 @@
-import { Input, Modal, createStyles } from '@mantine/core'
+import { Input, Modal, Select, createStyles } from '@mantine/core'
 import { IconChevronDown } from '@tabler/icons'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPatients } from '../redux/services/patientService';
 import ReactQuill from 'react-quill'
 import { btnStyle } from '../utils/linkStyle';
-import { addPrescription } from '../redux/services/prescriptionService';
-import { set } from 'mongoose';
+import { addPrescription, updatePrescription } from '../redux/services/prescriptionService';
+
 
 
 const useStyles = createStyles((theme) => ({
@@ -41,7 +41,7 @@ const useStyles = createStyles((theme) => ({
 
 
 
-function AddPrescription({opened, setOpened}) {
+function AddPrescription({opened, setOpened , title , prescription , setPrescription , mode}) {
 
   const modules = {
     toolbar : [
@@ -59,42 +59,75 @@ function AddPrescription({opened, setOpened}) {
     ]
   }
   
+  // const SelectItem = (({ image, label, description, ...others }) => (
+  //     <div ref={ref} {...others}>
+  //       <Group noWrap>
+  //         <Avatar src={image} />
+  
+  //         <div>
+  //           <Text size="sm">{label}</Text>
+  //           <Text size="xs" opacity={0.65}>
+  //             {description}
+  //           </Text>
+  //         </div>
+  //       </Group>
+  //     </div>
+  //   )
+  // );
+
+
   const {classes} = useStyles()
   const dispatch = useDispatch()
-  const [patientId , setPatientId] = useState()
-  const [description , setDescription] = useState('')
   const currentUser = useSelector(state => state.user)
-  const prescription = useSelector(state => state.prescription?.data)
-
+  const prescriptionData = useSelector(state => state.prescription?.data)
   const patients = useSelector((state) => state.patients?.data)
+
+
 
   useEffect(() => {
     dispatch(getPatients())
   },[dispatch])
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const newPrescription = {
-      patientId : patientId ,
-      userId : currentUser._id,
-      description : description
-    }
-    
-    dispatch(addPrescription(newPrescription))
-    .then((res) => {
-      setPatientId("")
-      setDescription("")
-      setOpened(false)
-      if(res.type === 'prescription/getPrescription/fulfilled') {
-        setOpened(false)
-        
-      }
-    }) .catch((error) => {
-      console.log('error' , error);
-    })
+  // ! Foncion qui convertir le select en donnant value et label
+  const optionItem = () =>  {
+    return patients.map((patient) => ({
+      value : patient._id,
+      label : `${patient.firstname } ${patient.lastname}`
+    }))
   }
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const newPrescription = {
+      ...prescription,
+      userId : currentUser._id
+    }
+
+    console.log(newPrescription);
+
+    if(mode === "update") {
+      dispatch(updatePrescription(newPrescription))
+    } else {
+      dispatch(addPrescription(newPrescription))
+      .then((res) => {
+        setOpened(false)
+        if(res.type === 'prescription/getPrescription/fulfilled') {
+          setOpened(false)
+          
+        }
+      }) .catch((error) => {
+        console.log('error' , error);
+      })
+    }
+  }
+
+  const handlePatientChange = (value) => {
+    // setSelectedPatient(value);
+    setPrescription({...prescription , patientId : value})
+  };
 
   return (
     <div>
@@ -104,37 +137,37 @@ function AddPrescription({opened, setOpened}) {
       overlayBlur={2}
       opened={opened}
       onClose={() => setOpened(false)} 
-      title="Ajouter une préscription"
+      title={title}
     >
     <form onSubmit={handleSubmit}>
-      <Input.Wrapper id={'3'} label="Selectionnez un patient" required maw={320} mx="auto">
-        <Input component="select" value={patientId} onChange={(e) => setPatientId(e.target.value)} rightSection={<IconChevronDown size={14} stroke={1.5} />}>
-            <option value=''>default</option>
-            {
-              patients && patients.map(({_id , firstname , lastname}) => (
-                <option key={_id} value={_id}>{firstname} {lastname}</option>
-              ))
-            }
-        </Input>
-      </Input.Wrapper>
+      {
+        mode === "update" ? (
+          <Select
+            label="Selectionnez un patient"
+            placeholder="Choisissez un patient"
+            data={optionItem()}
+            onChange={handlePatientChange}
+          />
+        ) : (
+          <Select
+            label="Selectionnez un patient"
+            placeholder="Choisissez un patient"
+            data={optionItem()}
+            onChange={handlePatientChange}
+          />
+        )
+      }
+      
       <Input.Wrapper className={classes.input} id={'3'} label="Description du medecin" required maw={320} mx="auto">
-      {/* <Editor
-        editorState={editorState}
-        onEditorStateChange={setEditorState}
-        toolbarClassName="toolbarClassName"
-        wrapperClassName="wrapperClassName"
-        editorClassName="editorClassName"
-      /> */}
       <ReactQuill
         theme='snow'
-        value={description}
-        onChange={setDescription}
+        value={prescription.description}
+        onChange={(e) => setPrescription({...prescription , description:e })}
         className='editor-input'
         modules={modules}
       />
       </Input.Wrapper>
       <button 
-        // disabled={loading}
        style={{ ...btnStyle, width: '100%', padding: '0.8rem' }} type="submit">
                         {/* {
                             !loading ? "Ajouter" : <Loader color="white" variant="dots" />

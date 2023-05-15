@@ -1,5 +1,5 @@
 const express = require('express')
-const { signup, login, getUser, logout, getUsers, editUser } = require('../controllers/UserControllers')
+const { signup, login, getUser, logout, getUsers, editUser, getPatient } = require('../controllers/UserControllers')
 const protect = require('../middleware/authMiddleware')
 const router = express.Router()
 
@@ -14,6 +14,7 @@ router.get('/logout', logout)
 router.get('/user', protect, getUser)
 router.get('/users', getUsers)
 router.put('/users/:id', editUser)
+router.get('/patients' , getPatient)
 
 
 module.exports = router

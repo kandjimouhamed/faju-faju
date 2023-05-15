@@ -4,7 +4,7 @@ import {btnStyle} from '../utils/linkStyle'
 import AddPrescription from './AddPrescription';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPrescription , deletePrescription } from '../redux/services/prescriptionService';
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import ModalConfirm from './ModalConfirm';
 
 export default function Prescription() {
@@ -13,19 +13,20 @@ export default function Prescription() {
     const dispatch = useDispatch()
     const prescriptions = useSelector((state) => state.prescription)
     const [id , setId] = useState(null)
+    const [ mode , setMode] = useState('') 
+    const [prescription , setPrescription ] = useState({
+      description  : "",
+      patientId : ""
+    })
+
+    console.log(prescription);
     
     
     
     useEffect(() => {
-      console.log(prescriptions);
       dispatch(getPrescription())
     },[dispatch])
 
-
-    // const handleDelete = (id) => {
-    //   dispatch(deletePrescription(id))
-    //   setOuvre(false)
-    // }
 
   return (
     <div className='table-container'>
@@ -37,7 +38,22 @@ export default function Prescription() {
           Ajouter une préscription médicale
         </button>
       </Grid>
-      {openedModal && <AddPrescription opened={openedModal} setOpened={setOpenedModal} />}
+      {openedModal  && mode === "update" ? (
+        <AddPrescription opened={openedModal}
+          setOpened={setOpenedModal}
+          title="Modifier une préscription"
+          mode={mode}
+          prescription={prescription}
+          setPrescription={setPrescription}
+        />
+      ) : (
+        <AddPrescription 
+          opened={openedModal}
+          prescription={prescription}
+          setPrescription={setPrescription}
+          setOpened={setOpenedModal}
+          title="Ajouter une préscription" />
+        )}
 
       <div>
       <Table>
@@ -52,19 +68,30 @@ export default function Prescription() {
       </thead>
       <tbody>
         {
-          prescriptions?.data.map(({ description , _id , patientId}) => (
-            <tr key={_id}>
-              <td>{patientId.firstname}</td>
-              <td>{patientId.lastname}</td>
-              <td>{patientId.phone}</td>
-              <td dangerouslySetInnerHTML={{__html : description}}/>
-              <td>
-                <AiOutlineDelete
+          prescriptions?.data.map((prescription) => (
+            <tr key={prescription._id}>
+              <td>{prescription.patientId.firstname}</td>
+              <td>{prescription.patientId.lastname}</td>
+              <td>{prescription.patientId.phone}</td>
+              <td dangerouslySetInnerHTML={{__html :prescription.description}}/>
+              <td className='d-flex'>
+                <div>
+                  <AiOutlineDelete
+                    onClick={() => {
+                      setOuvre((open) => !open)
+                      setId(prescription._id)
+                    }}
+                  />
+                </div>
+                <div className=''>
+                <AiOutlineEdit 
                   onClick={() => {
-                    setOuvre((open) => !open)
-                    setId(_id)
+                    setOpenedModal((open) => !open)
+                    setMode('update')
+                    setPrescription(prescription)
                   }}
-                />
+                 />
+                </div>
               </td>
             </tr>
           ))  
