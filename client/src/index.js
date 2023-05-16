@@ -29,6 +29,7 @@ root.render(
       //     xl: '90em',
       //   },
       // }}
+      
       >
       <Provider store={store}>
         <PersistGate persistor={persistor}>
