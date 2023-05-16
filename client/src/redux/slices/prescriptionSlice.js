@@ -138,8 +138,6 @@ const prescriptionSlice = createSlice({
             const updateItem = state.data.map((data) => 
                 data._id === payload.data._id ? payload.data : data
             )
-
-            console.log(updateItem);
             return {
                 ...state,
                 loading : false,

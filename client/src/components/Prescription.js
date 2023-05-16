@@ -18,10 +18,7 @@ export default function Prescription() {
       description  : "",
       patientId : ""
     })
-
-    console.log(prescription);
-    
-    
+  
     
     useEffect(() => {
       dispatch(getPrescription())
@@ -33,7 +30,13 @@ export default function Prescription() {
       <h1>Prescription</h1>
       <Grid justify="flex-end">
         <button
-         onClick={() => setOpenedModal((open) => !open)} style={btnStyle}
+         onClick={() => {
+          setPrescription({
+            description  : "",
+            patientId : ""
+          })
+          setOpenedModal((open) => !open)}} 
+         style={btnStyle}
          >
           Ajouter une préscription médicale
         </button>
@@ -69,10 +72,10 @@ export default function Prescription() {
       <tbody>
         {
           prescriptions?.data.map((prescription) => (
-            <tr key={prescription._id}>
-              <td>{prescription.patientId.firstname}</td>
-              <td>{prescription.patientId.lastname}</td>
-              <td>{prescription.patientId.phone}</td>
+            <tr key={prescription?._id}>
+              <td>{prescription?.patientId?.firstname}</td>
+              <td>{prescription?.patientId?.lastname}</td>
+              <td>{prescription?.patientId?.phone}</td>
               <td dangerouslySetInnerHTML={{__html :prescription.description}}/>
               <td className='d-flex'>
                 <div>
@@ -104,6 +107,7 @@ export default function Prescription() {
           setOuvre={setOuvre} 
           ouvre={ouvre}
           title={'Confirmer la suppréssion'} 
+          contenu={'Vous vous supprimer cette préscription.'}
           // handleDelete={handleDelete}
           id={id} />
         }

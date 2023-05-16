@@ -2,6 +2,7 @@ import { BsPersonCheck } from "react-icons/bs";
 import { RiCalendarCheckLine, RiDashboardLine } from "react-icons/ri";
 import { Settings } from 'tabler-icons-react';
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
+import { FaHeadSideCough } from "react-icons/fa";
 
 const adminData = [
     {
@@ -23,6 +24,12 @@ const adminData = [
         to: 'prescription',
         label: "Préscription",
         icon: <FaPrescriptionBottleAlt size={25} />
+    },
+    {
+        
+        to: 'patient',
+        label: "Patients",
+        icon: <FaHeadSideCough size={25} />
     },
     {
         to: 'settings',

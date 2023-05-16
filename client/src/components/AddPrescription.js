@@ -1,11 +1,12 @@
 import { Input, Modal, Select, createStyles } from '@mantine/core'
 import { IconChevronDown } from '@tabler/icons'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPatients } from '../redux/services/patientService';
 import ReactQuill from 'react-quill'
 import { btnStyle } from '../utils/linkStyle';
 import { addPrescription, updatePrescription } from '../redux/services/prescriptionService';
+
 
 
 
@@ -106,7 +107,6 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
       userId : currentUser._id
     }
 
-    console.log(newPrescription);
 
     if(mode === "update") {
       dispatch(updatePrescription(newPrescription))
@@ -128,6 +128,7 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
     // setSelectedPatient(value);
     setPrescription({...prescription , patientId : value})
   };
+
 
   return (
     <div>

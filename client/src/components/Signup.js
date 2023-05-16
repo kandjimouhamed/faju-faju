@@ -37,7 +37,6 @@ const Signup = () => {
             password,
             role: 'client'
         }
-        console.log(data);
 
         // if (password.length < 6) return form.setErrors({ password: "Mot de passe court, au moins 6 caractères" })
 
