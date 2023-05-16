@@ -8,6 +8,7 @@ const List = ({_id: id, description,isConfirmed, unAvaiblityId, unAvaiblities, o
         onClick()
         SetAppointmentId(id)
     }
+    console.log(unAvaiblities?.find(unAvaiblity => unAvaiblity._id === unAvaiblityId));
     return (
 
         <li style={{cursor: 'pointer'}} onClick={() => handleClick(id)} className="t-body">

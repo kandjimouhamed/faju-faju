@@ -21,8 +21,9 @@ const UserAppointments = () => {
   const [appointmentId, SetAppointmentId] = useState('')
   const [selectedUser, setSelectedUser] = useState(null)
 
+
   useEffect(() => {
-    // get all avaiblities && appointments
+    // get allavaiblities && appointments
     dispatch(getUnAvaiblities())
     dispatch(getAppointments())
     dispatch(getUsers())
@@ -32,8 +33,7 @@ const UserAppointments = () => {
     <div>
       {!allUnAppointments.loading ? (
         appointments
-          ?.filter((appointment) => appointment.userId === user._id).length !==
-          0 ? (
+          ?.filter((appointment) => appointment.userId === user._id).length !== 0 ? (
           <>
             <h1 style={{ marginBottom: "1rem" }}>Mes rendez-vous</h1>
             <div className="table-container">

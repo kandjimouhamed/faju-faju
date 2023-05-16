@@ -37,6 +37,7 @@ const editBusyTimes = async (req, res) => {
         res.status(404).json({message: "Utilisateur introuvable"})
         return
     }
+    console.log(req.params.id , 'id user');
 
     const findBusyTimes = await BusyModel.findOne({"userId": id})
     

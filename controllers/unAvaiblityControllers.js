@@ -4,12 +4,11 @@ const AppointmentModel = require("../model/appointmentModel");
 
 const addAvaiblity = async (req, res) => {
     const { day, time, motif, duration, breakBetweenAppoints } = req.body;
-    console.log(req.body)
-
+    // console.log(req.body);
     if (!day || !time) {
         res
         .status(400)
-        .json({ message: "Veuillez renseigner le jour les heures et la durée" });
+        .json({ message: "Veuillez renseigner le jour, les heures et la durée" });
         return;
     }
     if(!isValidTime(time.timeStart) || !isValidTime(time.timeEnd)){
@@ -32,6 +31,7 @@ const addAvaiblity = async (req, res) => {
         res.status(400).json({message: "Veuillez fournir une durée inférieur ou égale a 60min"})
         return
     }
+
 
     const findDay = await UnAvaiblityModel.findOne({ day });
     if (findDay) {
@@ -244,7 +244,7 @@ const addAvaiblity = async (req, res) => {
             endedAt,
             description: "",
             isConfirmed: null,
-            done: false
+            done: false 
         });
 
         totalEndMinuties += BREAK;
@@ -264,6 +264,7 @@ const getAvaiblities = async (req, res) => {
     res.json(avaiblities);
 };
 
+
 const updateAvaiblity = async (req, res) => {
     const avaiblityId = req.params.id;
     const findAvaiblity = await UnAvaiblityModel.findById(avaiblityId);
@@ -280,6 +281,7 @@ const updateAvaiblity = async (req, res) => {
     );
     res.json(updatedAvaiblity);
 };
+
 
 const deleteAvaiblity = async (req, res) => {
     const avaiblityId = req.params.id;

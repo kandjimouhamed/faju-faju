@@ -12,6 +12,8 @@ import UserHome from "../../../components/UserHome";
 import ChooseAppointement from "../../../components/ChooseAppointement";
 import UserAppointments from "../../../components/UserAppointments";
 import Settings from "../../../components/Settings";
+import Prescription from "../../../components/Prescription";
+
 
 const Dashboard = () => {
   const user = useSelector((state) => state.user);
@@ -43,6 +45,7 @@ const Dashboard = () => {
             <Route path="/avaiblities" element={<Avaiblities />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
+            <Route path="/prescription" element={<Prescription/>} />
           </Routes>
         ) : userRole === "client" ? (
           <Routes>

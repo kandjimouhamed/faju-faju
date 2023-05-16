@@ -22,7 +22,7 @@ const ChooseAppointement = () => {
   const unAvaiblities = useSelector((state) => state.unavaiblities.data);
   const [unAvaiblity, setUnAvaiblity] = useState(null);
   const allAppointments = useSelector((state) => state.appointments);
-  console.log(allAppointments.loading)
+  // console.log(allAppointments.loading)
   const userId = user._id;
   const [appointments, setAppointments] = useState([]);
   const form = useForm({
@@ -57,6 +57,7 @@ const ChooseAppointement = () => {
       console.log(error);
     }
   });
+
 
   const handleAppointment = (appointment) => {
     const btn = document.getElementById(appointment._id);
@@ -115,13 +116,13 @@ const ChooseAppointement = () => {
     else {
       setShowDescription(true)
     }
-    // console.log(unAvaiblities)
-
-   
-
     setUnAvaiblity(unAvaiblity);
     setAppointments(appointments);
   }, [allAppointments?.appointments, unAvaiblities, value]);
+  console.log(allAppointments.appointments); 
+  console.log(unAvaiblity , 'unAvaiblity'); 
+  console.log(value , "value");
+
 
   return (
     <div>
@@ -174,9 +175,11 @@ const ChooseAppointement = () => {
             Choisissez l'heure qui vous convient
           </span>
           <span></span>
-          {!allAppointments.loading ? (
-            allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (
-            allAppointments.appointments?.map((appointment, index) => (
+
+          {!allAppointments.loading  ? (
+            allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (          
+              allAppointments.appointments?.map((appointment, index) => (
+
                 <button
                   id={appointment._id}
                   title={

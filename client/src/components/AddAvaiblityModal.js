@@ -123,11 +123,12 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
         const appointmentHours = addSimpleAppointments(timeStart, timeEnd, WORKSTARTAT, WORKENDAT, APPOINTMENT_DURATION, BREAK)
 
         setLoading(true)
-        let unAvaiblityId
+        // let unAvaiblityId
 
         dispatch(addUnAvaiblity(unAvaiblity))
             .then(res => {
-                console.log(res)
+                // console.log(res);
+
                 if (res.type === "unavaiblities/addUnAvaiblity/rejected") {
                     setError(true)
                     console.log('ok ok ok')

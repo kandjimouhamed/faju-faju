@@ -17,7 +17,6 @@ const appointmentsSlice = createSlice({
             const appointment = state.appointments.find(appoint => appoint._id === payload.id)
             appointment.userId = payload.userId
             appointment.description = payload.description
-
             return state
         },
         // valiser un rendez vous

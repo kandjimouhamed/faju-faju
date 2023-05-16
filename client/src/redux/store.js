@@ -16,13 +16,23 @@ import unAvaiblitiesSlice from "./slices/unAvaiblitiesSlice";
 import appointmentsSlice from "./slices/appointmentsSlice";
 import usersSlice from "./slices/usersSlice";
 import busyTimesSlice from "./slices/busyTimesSlice";
+import prescriptionSlice from "./slices/prescriptionSlice";
+import patientSlice from "./slices/patientSlice";
 
 const persistConfig = {
     key: 'store',
     storage,
 };
 
-const reducers = combineReducers({ user: userSlice, unavaiblities: unAvaiblitiesSlice, appointments: appointmentsSlice, users: usersSlice, busyTimes: busyTimesSlice });
+const reducers = combineReducers({
+    user: userSlice, 
+    unavaiblities: unAvaiblitiesSlice, 
+    appointments: appointmentsSlice, 
+    users: usersSlice, 
+    busyTimes: busyTimesSlice ,
+    prescription : prescriptionSlice  ,
+    patients: patientSlice
+});
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
