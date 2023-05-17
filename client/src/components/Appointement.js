@@ -23,7 +23,7 @@ const Appointement = () => {
   const [isActive, setIsActive] = useState("today");
   const allUsers = useSelector((state) => state.users);
   const users = allUsers.users;
-  // const user = useSelector(state => state.user)  
+  const user = useSelector(state => state.user)
   const allAvaiblities = useSelector((state) => state.unavaiblities);
   const unAvaiblities = allAvaiblities?.data;
   

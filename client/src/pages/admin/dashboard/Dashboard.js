@@ -14,6 +14,7 @@ import UserAppointments from "../../../components/UserAppointments";
 import Settings from "../../../components/Settings";
 import Prescription from "../../../components/Prescription";
 import RendezVous from "../../../components/RendezVous";
+import Patients from "../../../components/Patients";
 
 
 const Dashboard = () => {
@@ -48,7 +49,7 @@ const Dashboard = () => {
             <Route path="*" element={<Navigate to="/dashboard" />} />
             <Route path="/prescription" element={<Prescription/>} />
             <Route path="/rendezvous" element={<RendezVous/>} />
-           
+            <Route path="/patient" element={<Patients/>} />
           </Routes>
         ) : userRole === "client" ? (
           <Routes>

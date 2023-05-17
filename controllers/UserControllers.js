@@ -16,7 +16,7 @@ const signup = async (req, res) => {
             phone: req.body.phone,
             email: req.body.email,
             password: req.body.password,
-            role: "admin"
+            role: "client"
         }
         // console.log(user)
         const { email } = user
@@ -115,6 +115,53 @@ const generateToken = (userId) => {
     return jwt.sign({ userId }, 'kkxsjgshgsyudyusydhsgfdybufdh-r', { expiresIn: '30d' })
 }
 
+const getPatient = async (req , res) => {
+    try {
+        const patient = await UserModel.find({ role: 'client' }).select("-password")
+        return res.status(200).json({data : patient , message : 'success'})
+    } catch (error)  {
+        console.log(error);
+        return res.status(500).json({message : error.message})
+    }
+}
+
+const deletePatients = async (req  , res) => {
+    const verifiePatient = await UserModel.findById(req.params.id)
+    if(!verifiePatient) return res.status(404).json({message : "Patient introuvable."})
+
+    try {
+        const patient = await UserModel.findByIdAndDelete(req.params.id)
+        return res.status(200).json({data : patient , message : "Patient supprimé avec success."})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message : error.message})
+    }
+}
+
+const  updatePatients = async (req , res) => {
+    const verifiePatient = await UserModel.findById(req.params.id)
+    if(!verifiePatient) return res.status(404).json({message : "Patient introuvable."})
+
+    try {
+        const {firstname , lastname , phone , email} = req.body
+        const patient = await UserModel.findByIdAndUpdate(verifiePatient , {
+            firstname ,
+            lastname ,
+            phone ,
+            email
+        },
+        {new : true}
+        )
+
+        return res.status(200).json({message : "Success" , data : patient })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({message : error.message})
+    }
+}
+
+
+
 module.exports = {
     login,
     signup,
@@ -122,4 +169,7 @@ module.exports = {
     logout,
     getUsers,
     editUser,
+    getPatient,
+    deletePatients,
+    updatePatients
 }

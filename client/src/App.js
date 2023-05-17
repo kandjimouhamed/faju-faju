@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import Login from "./components/Login";
 import Signup from './components/Signup';
 import SignupAdmin from "./components/SignupAdmin";
@@ -22,9 +23,15 @@ function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Toaster
-        containerStyle={{ bottom: "10%" }}
-        position="bottom-right"
+        containerStyle={{ bottom: "10%" }}  
+        position="top-center"
         reverseOrder={false}
+        toastOptions={{
+          // Define default options
+          style: {
+            background: '#363636',
+            color: '#fff',
+          }}}
       />
     </div>
   );

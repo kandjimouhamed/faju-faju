@@ -2,8 +2,8 @@ import { BsPersonCheck } from "react-icons/bs";
 import { RiCalendarCheckLine, RiDashboardLine } from "react-icons/ri";
 import { Settings } from 'tabler-icons-react';
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
-import { TbClockHour3 } from "react-icons/tb";
-
+import { TbClock2 } from "react-icons/tb";
+import { FaHeadSideCough } from "react-icons/fa";
 
 const adminData = [
     {
@@ -27,9 +27,15 @@ const adminData = [
         icon: <FaPrescriptionBottleAlt size={25} />
     },
     {
-        to: 'fixerrendezvous',
-        label: "Fixer Rendez-vous",
-        icon: <TbClockHour3 size={25} />
+        to: 'rendezvous',
+        label: "Rendez-vous",
+        icon: <TbClock2 size={25} />
+    },
+        {
+        
+        to: 'patient',
+        label: "Patients",
+        icon: <FaHeadSideCough size={25} />
     },
     {
         to: 'settings',

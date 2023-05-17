@@ -40,4 +40,24 @@ const deletePrescription = createAsyncThunk(
     }
 )
 
-export { addPrescription , getPrescription , deletePrescription }
+const updatePrescription = createAsyncThunk(
+    'prescription/updatePrescription',
+    async (prescription, {rejectWithValue}) => {
+        try {
+            console.log(prescription);
+            const {_id , userId , patientId , description} = prescription
+            const {data} = await instance.put(`/prescription/${_id}`, {
+                userId,
+                patientId,
+                description
+            })
+            return data
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+
+export { addPrescription , getPrescription , deletePrescription , updatePrescription}

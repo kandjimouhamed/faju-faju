@@ -3,7 +3,6 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Loader } from '@mantine/core';
 import logo from '../assets/img/illustration-2.png'
 import { Link, useNavigate } from 'react-router-dom';
-import GoogleButton from './GoogleButton';
 import instance from '../axios/globalInstance'
 // import axios from 'axios';
 
@@ -37,7 +36,6 @@ const Signup = () => {
             password,
             role: 'client'
         }
-        console.log(data);
 
         // if (password.length < 6) return form.setErrors({ password: "Mot de passe court, au moins 6 caractères" })
 

@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addPrescription, deletePrescription, getPrescription } from "../services/prescriptionService"
+import { addPrescription, deletePrescription, getPrescription, updatePrescription } from "../services/prescriptionService"
 
 const initialState = {
     data : [],
     loading:true,
     isSuccess : false,
-    message : ''
+    message : '',
+    getPrescriptionStatus : "",
+    addPrescriptionStatus : "",
+    updatePrescriptionStatus : "",
+    deletePrescriptionStatus : ""
 }
 
 const prescriptionSlice = createSlice({
@@ -18,7 +22,12 @@ const prescriptionSlice = createSlice({
         [addPrescription.pending] : (state , action) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "pending",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : ""
+
             }
         },
         [addPrescription.fulfilled] : (state , {payload}) => {
@@ -27,7 +36,11 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : [...state.data , payload.data ]
+                data : [...state.data , payload.data ],
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "success",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : ""
             }
         },
         [addPrescription.rejected] : (state , {payload}) => {
@@ -35,14 +48,21 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
-
+                message : payload,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "rejected",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : ""
             }
         },
         [getPrescription.pending] : (state , action) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getPrescriptionStatus : "pending",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : ""
             }
         },
         [getPrescription.fulfilled] : (state , {payload}) => {
@@ -50,7 +70,11 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload.data
+                data : payload.data,
+                getPrescriptionStatus : "success",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : ""
             }
         },
         [getPrescription.rejected] : (state , {payload}) => {
@@ -58,13 +82,21 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload.data
+                message : payload.data,
+                getPrescriptionStatus : "rejected",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : ""
             }
         },
         [deletePrescription.pending] : (state , action) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : "pending"
             }
         },
         [deletePrescription.fulfilled] : (state , {payload}) => {
@@ -73,7 +105,11 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : deleteItem
+                data : deleteItem,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : "success"
             }
         },
         [deletePrescription.rejected] : (state , {payload}) => {
@@ -81,9 +117,50 @@ const prescriptionSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload.data
+                message : payload.data,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "",
+                deletePrescriptionStatus : "rejected"
             }
         },
+        [updatePrescription.pending] : (state , action) => {
+            return {
+                ...state,
+                loading : true,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "pending",
+                deletePrescriptionStatus : ""
+            }
+        },
+        [updatePrescription.fulfilled] : (state , {payload}) => {
+            const updateItem = state.data.map((data) => 
+                data._id === payload.data._id ? payload.data : data
+            )
+            return {
+                ...state,
+                loading : false,
+                isSuccess : true,
+                data : updateItem,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "success",
+                deletePrescriptionStatus : ""
+            }
+        },
+        [updatePrescription.rejected] : (state , {payload}) => {
+            return {
+                ...state,
+                loading : false,
+                isSuccess : false,
+                message : payload.data,
+                getPrescriptionStatus : "",
+                addPrescriptionStatus : "",
+                updatePrescriptionStatus : "rejected",
+                deletePrescriptionStatus : ""
+            }
+        }
 
     }
 })
