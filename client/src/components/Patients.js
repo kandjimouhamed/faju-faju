@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPatients } from '../redux/services/patientService';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import ModalConfirm from './ModalConfirm';
+import { GrFormView } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = createStyles((theme) => ({
@@ -43,6 +45,7 @@ const useStyles = createStyles((theme) => ({
 
 function Patients() {
 
+    const navigate = useNavigate()
     const {classes}  = useStyles()
     const [openedModal, setOpenedModal] = useState(false);
     const statePatients = useSelector((state) => state.patients)
@@ -60,12 +63,14 @@ function Patients() {
     })
     const [error , setError] = useState("")
 
-
-    console.log(statePatients);
   useEffect(() => {
     dispatch(getPatients())
   },[dispatch])
 
+
+  const handleDetail = () => {
+    navigate('/dashboard/detail-patient')
+  }
 
   return (
     <>
@@ -136,11 +141,11 @@ function Patients() {
                         <tbody>
                             {
                                 statePatients?.data.map((patient) => (
-                                    <tr key={patient._id}>
-                                        <td>{patient.firstname}</td>
-                                        <td>{patient.lastname}</td>
-                                        <td>{patient.phone}</td>
-                                        <td>{patient.email}</td>
+                                    <tr key={patient?._id}>
+                                        <td>{patient?.firstname}</td>
+                                        <td>{patient?.lastname}</td>
+                                        <td>{patient?.phone}</td>
+                                        <td>{patient?.email}</td>
                                         <td className='d-flex'>
                                     <div>
                                     <AiOutlineDelete
@@ -151,14 +156,20 @@ function Patients() {
                                     />
                                     </div>
                                     <div className=''>
-                                    <AiOutlineEdit
-                                    onClick={() => {
-                                        setOpenedModal((open) => !open)
-                                        setMode('update')
-                                        setPatients(patient)
-                                    }}
-                                    />
+                                        <AiOutlineEdit
+                                        onClick={() => {
+                                            setOpenedModal((open) => !open)
+                                            setMode('update')
+                                            setPatients(patient)
+                                        }}
+                                        />
                                     </div>
+                                    <div>
+                                        <GrFormView 
+                                            onClick={handleDetail}
+                                        />
+                                    </div>
+
                                 </td>
                                     </tr>
                                 ))

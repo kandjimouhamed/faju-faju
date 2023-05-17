@@ -23,7 +23,7 @@ const signup = async (req, res) => {
         // console.log(email)
         const findUser = await UserModel.find({ email })
         if (findUser.length) {
-            res.status(402).send({ error: "L'utilisateur exist deja" })
+            res.status(402).send({ error: "Cet patient exist deja" })
             return
         }
 
@@ -115,6 +115,38 @@ const generateToken = (userId) => {
     return jwt.sign({ userId }, 'kkxsjgshgsyudyusydhsgfdybufdh-r', { expiresIn: '30d' })
 }
 
+
+const AddPatient = async (req , res) => {
+    const user = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phone: req.body.phone,
+        email: req.body.email,
+        password: req.body.password,
+        role: "client"
+    }
+
+    // ! Verifier le phone existe
+    const { phone } = user
+
+    const findUser = await UserModel.find({ phone })
+    if(findUser) return res.status(402).json({ error: "L'utilisateur exist deja" })
+
+
+    // ? HACK PASSWORD 
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(user.password, salt)
+
+    try {
+        const createdUser = await UserModel.create({ ...user, password: hashedPassword })
+        return res.status(200).json({data : createdUser , message : "patient ajouté avec success"})
+    }
+    catch (err) {
+        return res.status(400).json(err)
+    }
+         
+}
+
 const getPatient = async (req , res) => {
     try {
         const patient = await UserModel.find({ role: 'client' }).select("-password")
@@ -171,5 +203,6 @@ module.exports = {
     editUser,
     getPatient,
     deletePatients,
-    updatePatients
+    updatePatients,
+    AddPatient
 }

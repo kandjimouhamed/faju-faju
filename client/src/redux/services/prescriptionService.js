@@ -6,6 +6,7 @@ const addPrescription = createAsyncThunk(
     'prescription/addPrescription',
     async (prescription , {rejectWithValue}) => {
         try {
+            // console.log(prescription);
             const {data} = await instance.post('/prescription' , prescription)
             return data
         } catch (error) {
@@ -44,12 +45,13 @@ const updatePrescription = createAsyncThunk(
     'prescription/updatePrescription',
     async (prescription, {rejectWithValue}) => {
         try {
-            console.log(prescription);
-            const {_id , userId , patientId , description} = prescription
+            
+            const {_id , userId , patientId , description , dataPatient} = prescription
             const {data} = await instance.put(`/prescription/${_id}`, {
                 userId,
                 patientId,
-                description
+                description,
+                dataPatient
             })
             return data
 

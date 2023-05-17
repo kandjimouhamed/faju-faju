@@ -14,6 +14,10 @@ const prescriptionModel = new mongoose.Schema({
         type : String,
         require : [true , 'Vieullez donner la description.']
     },
+    dataPatient : {
+        type : Object,
+        // require : [true , 'Vieullez donner la description.']
+    },
     createdAt: {
         type: Date,
         default: Date.now

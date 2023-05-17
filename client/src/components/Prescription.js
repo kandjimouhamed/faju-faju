@@ -7,6 +7,7 @@ import { getPrescription } from '../redux/services/prescriptionService';
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import ModalConfirm from './ModalConfirm';
 import { getPatients } from '../redux/services/patientService';
+import { GrFormView } from "react-icons/gr";
 
 
 const useStyles = createStyles((theme) => ({
@@ -53,7 +54,8 @@ export default function Prescription() {
   const [ mode , setMode] = useState('') 
   const [prescription , setPrescription ] = useState({
     description  : "",
-    patientId : ""
+    patientId : "",
+    dataPatient : {}
   })
   const [error , setError] = useState("")
   
@@ -79,7 +81,8 @@ export default function Prescription() {
             onClick={() => {
               setPrescription({
                 description  : "",
-                patientId : ""
+                patientId : "",
+                dataPatient : {}
               })
               setOpenedModal((open) => !open)
               setError("")
@@ -129,9 +132,9 @@ export default function Prescription() {
             {
               prescriptions?.data.map((prescription) => (
                 <tr key={prescription?._id}>
-                  <td>{prescription?.patientId?.firstname}</td>
-                  <td>{prescription?.patientId?.lastname}</td>
-                  <td>{prescription?.patientId?.phone}</td>
+                  <td>{prescription?.dataPatient?.firstname}</td>
+                  <td>{prescription?.dataPatient?.lastname}</td>
+                  <td>{prescription?.dataPatient?.phone}</td>
                   <td dangerouslySetInnerHTML={{__html :prescription.description}}/>
                   <td className='d-flex'>
                     <div>
@@ -150,6 +153,9 @@ export default function Prescription() {
                         setPrescription(prescription)
                       }}
                     />
+                    </div>
+                    <div className=''>
+                      <GrFormView />
                     </div>
                   </td>
                 </tr>

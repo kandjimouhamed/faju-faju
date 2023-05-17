@@ -4,8 +4,7 @@ import { btnStyle } from '../utils/linkStyle';
 import { IconAlertCircle, IconAt, IconBrandTwitter } from '@tabler/icons';
 import { IMaskInput } from 'react-imask';
 import { useDispatch, useSelector } from 'react-redux';
-import instance from '../axios/globalInstance';
-import { updatePatients } from '../redux/services/patientService';
+import { addPatient, updatePatients } from '../redux/services/patientService';
 import { toast } from 'react-hot-toast';
 
 
@@ -78,32 +77,44 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             })
   
           } else {
-            try {
-                await instance.post("/signup", patients) 
+            // try {
+            //   dispatch(addPatient(patients))
+            //   setOpened(false)
+            //   toast('Patient ajouté avec success', {icon: '👏',});
+            //   setPatients({
+            //       firstname : "",
+            //       lastname : "",
+            //       phone : "",
+            //       email : "",
+            //       password : "1234",
+            //       role: 'client'
+            //   })
+            // } catch (err) {
+            //   console.log(err);
+            //   toast(err.response.data.err)
+            // }
+            dispatch(addPatient(patients))
+            .then((res) => {
+              if(res.type === "patient/addPatient/rejected") {
+                console.log(res);
+                toast(res.payload.error)
+              } else if(res.type === "patient/addPatient/fulfilled") {
                 setOpened(false)
                 toast('Patient ajouté avec success', {icon: '👏',});
                 setPatients({
-                  firstname : "",
-                  lastname : "",
-                  phone : "",
-                  email : "",
-                  password : "1234",
-                  role: 'client'
-              })
-            //     await axios.post('http://localhost:5550/api/signup', data)
-            //         .then(response => {
-            //             console.log(response)
-            //             navigate('/login')
-            //         })
-            //         .catch(error => {
-            //             console.log(error)
-            //              });
-            // }
-            }
-            catch (err) {
-                console.log(err.response.data);
-                toast(err.response.data.error)
-            }
+                    firstname : "",
+                    lastname : "",
+                    phone : "",
+                    email : "",
+                    password : "1234",
+                    role: 'client'
+                })
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              toast(err.response.data.err)
+            })
           }
         }
     }
@@ -133,7 +144,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             }
         /> 
         {
-        error === "Viellez remplire ce champ ." && patients.firstname === "" && (
+        error === "Viellez remplire ce champ ." && patients?.firstname === "" && (
             <Alert icon={<IconAlertCircle size="1rem" />} color="red">
               {error}
             </Alert>
@@ -155,7 +166,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             }
         /> 
         {
-        error === "Viellez remplire ce champ ." && patients.lastname === "" && (
+        error === "Viellez remplire ce champ ." && patients?.lastname === "" && (
             <Alert icon={<IconAlertCircle size="1rem" />} color="red">
               {error}
             </Alert>
@@ -171,7 +182,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             mask="+221 00-000-00-00"
         />
         {
-        error === "Viellez remplire ce champ ." && patients.phone === "" && (
+        error === "Viellez remplire ce champ ." && patients?.phone === "" && (
             <Alert icon={<IconAlertCircle size="1rem" />} color="red">
               {error}
             </Alert>

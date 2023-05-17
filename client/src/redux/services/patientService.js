@@ -18,7 +18,7 @@ const addPatient = createAsyncThunk(
     'patient/addPatient',
     async (patient, { rejectWithValue }) => {
       try {
-        const { data } = await instance.post("/signup", patient);
+        const { data } = await instance.post("/patients", patient);
         return data;
       } catch (error) {
         console.log(error);

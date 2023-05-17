@@ -62,7 +62,7 @@ const patientSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload.data
             }
         },
         [deletePatients.pending] : (state) => {
