@@ -165,7 +165,9 @@ const HeaderItem = () => {
                         isAdmin ? adminData.map(data => (
                             <ListItem key={data.to} {...data} />
                         )) : userData.map(data => (
-                            <ListItem key={data.to} {...data} setShow = {setShow} opened = {opened} />
+                            <ListItem key={data.to} {...data} 
+                            setShow = {setShow} opened = {opened} 
+                            onClose={close}/>
                         ))
                     }
                 </List>
