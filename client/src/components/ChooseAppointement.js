@@ -104,6 +104,7 @@ const ChooseAppointement = () => {
     dispatch(getUnAvaiblities())
     dispatch(getAppointments())
     dispatch(getUsers())
+    console.log(dispatch(getAppointments()))
   }, [])
 
   useEffect(() => {

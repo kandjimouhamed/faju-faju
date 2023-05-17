@@ -260,7 +260,6 @@ const addAvaiblity = async (req, res) => {
     res.json(createdAvaiblity);
 };
 
-
 const getAvaiblities = async (req, res) => {
     const avaiblities = await UnAvaiblityModel.find();
     res.json(avaiblities);

@@ -35,7 +35,7 @@ const signup = async (req, res) => {
             const createdUser = await UserModel.create({ ...user, password: hashedPassword })
             res.status(200).json({
                 // 'res':user,
-                // 'message': "l'inscription est reuissie",
+                // 'message': "l'inscription est reuissie", 
                 token: generateToken(createdUser._id)
             })
         }

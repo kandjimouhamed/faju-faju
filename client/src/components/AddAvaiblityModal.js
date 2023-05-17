@@ -130,6 +130,7 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
                 console.log(res);
                 if (res.type === "unavaiblities/addUnAvaiblity/rejected") {
                     setError(true)
+                    console.log('ok ok ok')
                     if(res.payload.data){
                         const result = res.payload.data.map(data => {
                             return `${data.startedAt} - ${data.endedAt}`
@@ -144,6 +145,7 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
                 }
                 if (res.type === "unavaiblities/addUnAvaiblity/fulfilled") {
                     setError(false)
+                    console.log('nok nok nok')
                     successMsg("Indisponibilité ajoutée")
                     setOpened(false)
                     form.reset()

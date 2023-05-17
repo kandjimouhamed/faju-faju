@@ -14,8 +14,8 @@ const Dashboard = () => {
     const [performed, setPerformed] = useState([])
     const [canceled, setCanceled] = useState([])
     const [coming, setComing] = useState([])
-
     useEffect(() => {
+       
         const performed = []
         const coming = []
         // !nbre de rdv confirmer
