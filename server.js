@@ -8,6 +8,7 @@ const appointmentRoutes = require('./routes/appoinmentsRoutes')
 const busyTimeRoutes = require('./routes/busyTimesRoute')
 const prescriptionRoutes = require('./routes/prescriptionRoutes')
 const patientsRoutes = require('./routes/patientsRoutes')
+const rendezvousRoutes = require('./routes/rendezvousRoutes')
 
 const cors = require('cors')
 const connectToMongoDB = require('./config/db')
@@ -43,6 +44,7 @@ app.use('/api/appointments', appointmentRoutes)
 app.use('/api/busy-times', busyTimeRoutes)
 app.use('/api/prescription' , prescriptionRoutes )
 app.use('/api/patient' , patientsRoutes)
+app.use('/api/rendezvous' , rendezvousRoutes)
 
 // serve frontend
 if (process.env.NODE_ENV === 'production') {
