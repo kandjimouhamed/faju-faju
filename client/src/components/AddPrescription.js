@@ -1,11 +1,12 @@
-import { Input, Modal, Select, createStyles } from '@mantine/core'
-import { IconChevronDown } from '@tabler/icons'
+import { Alert, Input, Loader, Modal, Select, createStyles } from '@mantine/core'
+import { IconAlertCircle, IconChevronDown } from '@tabler/icons'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPatients } from '../redux/services/patientService';
 import ReactQuill from 'react-quill'
 import { btnStyle } from '../utils/linkStyle';
 import { addPrescription, updatePrescription } from '../redux/services/prescriptionService';
+import { toast } from "react-hot-toast";
 
 
 
@@ -42,7 +43,8 @@ const useStyles = createStyles((theme) => ({
 
 
 
-function AddPrescription({opened, setOpened , title , prescription , setPrescription , mode}) {
+function AddPrescription({ opened, setOpened , title , prescription , setPrescription , mode , boutton , error , setError }) {
+
 
   const modules = {
     toolbar : [
@@ -80,7 +82,7 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
   const {classes} = useStyles()
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.user)
-  const prescriptionData = useSelector(state => state.prescription?.data)
+  const prescriptionData = useSelector(state => state.prescription)
   const patients = useSelector((state) => state.patients?.data)
 
 
@@ -98,7 +100,6 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
     }))
   }
 
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -106,26 +107,50 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
       ...prescription,
       userId : currentUser._id
     }
-
-
-    if(mode === "update") {
-      dispatch(updatePrescription(newPrescription))
+    if(prescription.patientId === "" && prescription.description === "") {
+      setError("Veillez remplire tous les champs.")
+    } else if(prescription.patientId === "") {
+      setError("Veillez selectionner un patient.")
+    } else if(prescription.description === "") {
+      setError("Veillez remplire la préscription.")
     } else {
-      dispatch(addPrescription(newPrescription))
-      .then((res) => {
-        setOpened(false)
-        if(res.type === 'prescription/getPrescription/fulfilled') {
+
+      if(mode === "update") {
+        
+        dispatch(updatePrescription(newPrescription))
+        .then((res) => {
           setOpened(false)
-          
-        }
-      }) .catch((error) => {
-        console.log('error' , error);
-      })
+          toast('Prescription modifié avec success', {icon: '👏',});
+          setPrescription({
+            description : "",
+            patients : ""
+          })
+        })
+        .catch((err) => {
+          console.log(err);
+          toast('Error');
+        })
+
+      } else {
+
+        dispatch(addPrescription(newPrescription))
+        .then((res) => {
+          setOpened(false)
+          toast('Prescription Ajouter avec success', {icon: '👏',});
+          setPrescription({
+            description : "",
+            patients : ""
+          })
+        }) .catch((err) => {
+          console.log('error' , err);
+          toast(err.response.data.error);
+        })
+
+      }
     }
   }
 
   const handlePatientChange = (value) => {
-    // setSelectedPatient(value);
     setPrescription({...prescription , patientId : value})
   };
 
@@ -141,22 +166,23 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
       title={title}
     >
     <form onSubmit={handleSubmit}>
+      
+      <Select
+        label="Selectionnez un patient"
+        placeholder="Choisissez un patient"
+        data={optionItem()}
+        onChange={handlePatientChange}
+      />
       {
-        mode === "update" ? (
-          <Select
-            label="Selectionnez un patient"
-            placeholder="Choisissez un patient"
-            data={optionItem()}
-            onChange={handlePatientChange}
-          />
-        ) : (
-          <Select
-            label="Selectionnez un patient"
-            placeholder="Choisissez un patient"
-            data={optionItem()}
-            onChange={handlePatientChange}
-          />
-        )
+        error === "Veillez remplire tous les champs." ? (
+          <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+            {error}
+          </Alert>
+        ) : error === "Veillez selectionner un patient." ? (
+          <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+            {error}
+          </Alert>
+        ) : null
       }
       
       <Input.Wrapper className={classes.input} id={'3'} label="Description du medecin" required maw={320} mx="auto">
@@ -167,13 +193,23 @@ function AddPrescription({opened, setOpened , title , prescription , setPrescrip
         className='editor-input'
         modules={modules}
       />
+      {
+        error === "Veillez remplire tous les champs." ? (
+          <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+            {error}
+          </Alert>
+        ) : error === "Veillez remplire la préscription." ? (
+          <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+            {error}
+          </Alert>
+        ) : null
+      }
       </Input.Wrapper>
       <button 
        style={{ ...btnStyle, width: '100%', padding: '0.8rem' }} type="submit">
-                        {/* {
-                            !loading ? "Ajouter" : <Loader color="white" variant="dots" />
-                        } */}
-                        Ajouter
+        {
+          prescriptionData.addPrescriptionStatus !== "pending"   ? boutton : <Loader color="white" variant="dots" />
+        }                 
       </button>
     </form>
       </Modal>

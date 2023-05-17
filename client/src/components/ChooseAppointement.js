@@ -122,9 +122,6 @@ const ChooseAppointement = () => {
     setUnAvaiblity(unAvaiblity);
     setAppointments(appointments);
   }, [allAppointments?.appointments, unAvaiblities, value]);
-  console.log(allAppointments.appointments); 
-  console.log(unAvaiblity , 'unAvaiblity'); 
-  console.log(value , "value");
 
 
   return (

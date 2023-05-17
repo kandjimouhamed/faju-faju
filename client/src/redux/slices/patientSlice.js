@@ -5,7 +5,8 @@ const initialState = {
     data : [],
     loading : true,
     isSuccess : false,
-    message : ""
+    message : "",
+    getPrescriptionStatus : "",
 
 }
 
@@ -16,7 +17,8 @@ const patientSlice = createSlice({
         [getPatients.pending] : (state) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getPatientStatus : "pending",
             }
         },
 
@@ -25,7 +27,8 @@ const patientSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload.data
+                data : payload.data,
+                getPatientStatus : "success",
             }
         },
 
@@ -34,7 +37,8 @@ const patientSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload,
+                getPatientStatus : "rejected",
             }
         },
         [addPatient.pending] : (state) => {

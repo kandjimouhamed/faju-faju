@@ -1,4 +1,4 @@
-import { Input, InputBase, Modal, Tooltip, createStyles } from '@mantine/core'
+import { Alert, Input, InputBase, Modal, Tooltip, createStyles } from '@mantine/core'
 import React from 'react'
 import { btnStyle } from '../utils/linkStyle';
 import { IconAlertCircle, IconAt, IconBrandTwitter } from '@tabler/icons';
@@ -6,6 +6,7 @@ import { IMaskInput } from 'react-imask';
 import { useDispatch, useSelector } from 'react-redux';
 import instance from '../axios/globalInstance';
 import { updatePatients } from '../redux/services/patientService';
+import { toast } from 'react-hot-toast';
 
 
 const useStyles = createStyles((theme) => ({
@@ -38,7 +39,7 @@ const useStyles = createStyles((theme) => ({
     }
   }));
 
-function AddPatient({opened , setOpened , title , patients , setPatients , mode}) {
+function AddPatient({opened , setOpened , title , patients , setPatients , error , setError}) {
 
     // ############################################## STYLE DE L'APP #############################################
     const modules = {
@@ -57,40 +58,52 @@ function AddPatient({opened , setOpened , title , patients , setPatients , mode}
         ]
     }
     const {classes} = useStyles()
-    const dispatch = useDispatch( )
+    const dispatch = useDispatch()
 
-    console.log(mode);
     const handleSubmit = async(e) => {
         e.preventDefault()
-        if(patients._id) {
-          dispatch(updatePatients(patients))
-          .then(() => {
-            setOpened(false)
-          })
+
+        if(patients.firstname === "" || patients.lastname ==="" || patients.phone==="") {
+          setError("Viellez remplire ce champ .")
         } else {
-          try {
-              await instance.post("/signup", patients) 
+          if(patients._id) {
+            dispatch(updatePatients(patients))
+            .then(() => {
               setOpened(false)
-              setPatients({
-                firstname : "",
-                lastname : "",
-                phone : "",
-                email : "",
-                password : "1234",
-                role: 'client'
+              toast('Patient modifié avec success', {icon: '👏',});
             })
-          //     await axios.post('http://localhost:5550/api/signup', data)
-          //         .then(response => {
-          //             console.log(response)
-          //             navigate('/login')
-          //         })
-          //         .catch(error => {
-          //             console.log(error)
-          //              });
-          // }
-          }
-          catch (err) {
+            .catch((err) => {
               console.log(err);
+              toast('Error')
+            })
+  
+          } else {
+            try {
+                await instance.post("/signup", patients) 
+                setOpened(false)
+                toast('Patient ajouté avec success', {icon: '👏',});
+                setPatients({
+                  firstname : "",
+                  lastname : "",
+                  phone : "",
+                  email : "",
+                  password : "1234",
+                  role: 'client'
+              })
+            //     await axios.post('http://localhost:5550/api/signup', data)
+            //         .then(response => {
+            //             console.log(response)
+            //             navigate('/login')
+            //         })
+            //         .catch(error => {
+            //             console.log(error)
+            //              });
+            // }
+            }
+            catch (err) {
+                console.log(err.response.data);
+                toast(err.response.data.error)
+            }
           }
         }
     }
@@ -119,6 +132,13 @@ function AddPatient({opened , setOpened , title , patients , setPatients , mode}
                 </Tooltip>
             }
         /> 
+        {
+        error === "Viellez remplire ce champ ." && patients.firstname === "" && (
+            <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+              {error}
+            </Alert>
+          )
+        }
       </Input.Wrapper>
       <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre Nom" required maw={320} mx="auto">
         <Input
@@ -134,8 +154,15 @@ function AddPatient({opened , setOpened , title , patients , setPatients , mode}
                 </Tooltip>
             }
         /> 
+        {
+        error === "Viellez remplire ce champ ." && patients.lastname === "" && (
+            <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+              {error}
+            </Alert>
+          )
+        }
       </Input.Wrapper>
-      <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre Nom" required maw={320} mx="auto">
+      <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre numéro de téléphone" required maw={320} mx="auto">
         <InputBase 
             value={patients.phone}
             onChange={(e) => setPatients({...patients, phone : e.target.value})}
@@ -143,13 +170,20 @@ function AddPatient({opened , setOpened , title , patients , setPatients , mode}
             component={IMaskInput} 
             mask="+221 00-000-00-00"
         />
+        {
+        error === "Viellez remplire ce champ ." && patients.phone === "" && (
+            <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+              {error}
+            </Alert>
+          )
+        }
       </Input.Wrapper>
 
       <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre email" required maw={320} mx="auto">
         <Input
         value={patients.email}
         onChange={(e) => setPatients({...patients, email : e.target.value})}
-        icon={<IconAt />}
+        // icon={<IconAt />}
         placeholder="Email"
         />
       </Input.Wrapper>
