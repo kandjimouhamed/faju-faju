@@ -67,9 +67,9 @@ function Patients() {
     dispatch(getPatients())
   },[dispatch])
 
-
-  const handleDetail = () => {
-    navigate('/dashboard/detail-patient')
+console.log(statePatients);
+  const handleDetail = (id) => {
+    navigate(`/dashboard/detail-patient/${id}`)
   }
 
   return (
@@ -166,7 +166,7 @@ function Patients() {
                                     </div>
                                     <div>
                                         <GrFormView 
-                                            onClick={handleDetail}
+                                            onClick={() => handleDetail(patient?._id)}
                                         />
                                     </div>
 

@@ -49,7 +49,7 @@ const Dashboard = () => {
             <Route path="*" element={<Navigate to="/dashboard" />} />
             <Route path="/prescription" element={<Prescription/>} />
             <Route path="/patient" element={<Patients/>} />
-            <Route path="/detail-patient" element={<DetailPatient/>} />
+            <Route path="/detail-patient/:id" element={<DetailPatient/>} />
           </Routes>
         ) : userRole === "client" ? (
           <Routes>

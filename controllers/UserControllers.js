@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('../config/auth')
 require("dotenv").config();
-const BusyModel = require('../model/busyTimeModel')
+const BusyModel = require('../model/busyTimeModel');
+const PrescriptionModel = require('../model/prescriptionModel');
 
 
 // @desc: dignup
@@ -192,6 +193,22 @@ const  updatePatients = async (req , res) => {
     }
 }
 
+const detailPatient = async (req , res) => {
+    const patientId = req.params.id
+    const verifiePatient = await UserModel.findById(patientId)
+    if(!verifiePatient) return res.status(404).json({message : "Patient introuvable..."})
+
+    const prescription = await PrescriptionModel.find({patientId : patientId})
+
+    try {
+        const detail = await UserModel.findOne({_id : patientId})
+        return res.status(200).json({data : detail , prescription : prescription , message : "success"}) 
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({message : error.message})
+    }
+}
+
 
 
 module.exports = {
@@ -204,5 +221,6 @@ module.exports = {
     getPatient,
     deletePatients,
     updatePatients,
-    AddPatient
+    AddPatient,
+    detailPatient
 }

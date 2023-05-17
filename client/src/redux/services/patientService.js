@@ -54,4 +54,17 @@ const updatePatients = createAsyncThunk(
     }
 )
 
-export {getPatients , addPatient , deletePatients , updatePatients}
+const detailPatient = createAsyncThunk(
+    'patient/detailPatient',
+    async(id , {rejectWithValue}) => {
+        try {
+            const {data} = await instance.get(`/patients/detail/${id}`)
+            return data
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+
+export {getPatients , addPatient , deletePatients , updatePatients , detailPatient}

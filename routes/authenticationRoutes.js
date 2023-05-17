@@ -1,5 +1,5 @@
 const express = require('express')
-const { signup, login, getUser, logout, getUsers, editUser, getPatient, deletePatients, updatePatients, AddPatient } = require('../controllers/UserControllers')
+const { signup, login, getUser, logout, getUsers, editUser, getPatient, deletePatients, updatePatients, AddPatient, detailPatient } = require('../controllers/UserControllers')
 const protect = require('../middleware/authMiddleware')
 
 const router = express.Router()
@@ -19,6 +19,7 @@ router.post('/patients' , AddPatient)
 router.get('/patients' , getPatient)
 router.delete('/patients/:id' , deletePatients)
 router.put("/patients/:id", updatePatients)
+router.get("/patients/detail/:id" , detailPatient)
 
 
 module.exports = router
