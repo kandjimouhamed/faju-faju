@@ -90,15 +90,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
                   password : "1234",
                   role: 'client'
               })
-            //     await axios.post('http://localhost:5550/api/signup', data)
-            //         .then(response => {
-            //             console.log(response)
-            //             navigate('/login')
-            //         })
-            //         .catch(error => {
-            //             console.log(error)
-            //              });
-            // }
+        
             }
             catch (err) {
                 console.log(err.response.data);

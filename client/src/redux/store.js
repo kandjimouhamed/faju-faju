@@ -18,6 +18,7 @@ import usersSlice from "./slices/usersSlice";
 import busyTimesSlice from "./slices/busyTimesSlice";
 import prescriptionSlice from "./slices/prescriptionSlice";
 import patientSlice from "./slices/patientSlice";
+import rendezvousSlice from "./slices/rendezvousSlice";
 
 const persistConfig = {
     key: 'store',
@@ -31,7 +32,8 @@ const reducers = combineReducers({
     users: usersSlice, 
     busyTimes: busyTimesSlice ,
     prescription : prescriptionSlice  ,
-    patients: patientSlice
+    patients: patientSlice,
+    rendezvous: rendezvousSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
