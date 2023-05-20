@@ -190,14 +190,16 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
         }
       </Input.Wrapper>
 
-      <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre email" required maw={320} mx="auto">
-        <Input
-        value={patients.email}
-        onChange={(e) => setPatients({...patients, email : e.target.value})}
-        // icon={<IconAt />}
-        placeholder="Email"
+      {/* <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre email" required maw={320} mx="auto"> */}
+        <InputBase
+          label="Entrez votre email"
+          type='email'
+          value={patients.email}
+          onChange={(e) => setPatients({...patients, email : e.target.value})}
+          // icon={<IconAt />}
+          placeholder="Email"
         />
-      </Input.Wrapper>
+      {/* </Input.Wrapper> */}
       <button 
        style={{ ...btnStyle, width: '100%', padding: '0.8rem' }} type="submit">
                         {/* {

@@ -67,7 +67,7 @@ function Patients() {
     dispatch(getPatients())
   },[dispatch])
 
-console.log(statePatients);
+
   const handleDetail = (id) => {
     navigate(`/dashboard/detail-patient/${id}`)
   }
@@ -134,7 +134,7 @@ console.log(statePatients);
                             <th>Prénom patient</th>
                             <th>Nom patient</th>
                             <th>Numéro téléphone</th>
-                            <th>Email</th>
+                            {/* <th>Email</th> */}
                             <th>Action</th>
                             </tr>
                         </thead>
@@ -145,7 +145,7 @@ console.log(statePatients);
                                         <td>{patient?.firstname}</td>
                                         <td>{patient?.lastname}</td>
                                         <td>{patient?.phone}</td>
-                                        <td>{patient?.email}</td>
+                                        {/* <td>{patient?.email}</td> */}
                                         <td className='d-flex'>
                                     <div>
                                     <AiOutlineDelete

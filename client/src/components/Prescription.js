@@ -1,13 +1,16 @@
-import { Grid, Loader, Table, createStyles } from '@mantine/core'
+import { Button, Grid, Loader, Table, Text, createStyles } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import {btnStyle} from '../utils/linkStyle'
 import AddPrescription from './AddPrescription';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPrescription } from '../redux/services/prescriptionService';
+import { deletePrescription, getPrescription } from '../redux/services/prescriptionService';
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import ModalConfirm from './ModalConfirm';
 import { getPatients } from '../redux/services/patientService';
 import { GrFormView } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
+import { openConfirmModal } from '@mantine/modals';
+import { toast } from 'react-hot-toast';
 
 
 const useStyles = createStyles((theme) => ({
@@ -43,8 +46,10 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
+
 export default function Prescription() {
 
+  const navigate = useNavigate()
   const {classes}  = useStyles()
   const [openedModal, setOpenedModal] = useState(false);
   const [ouvre , setOuvre] = useState(false)
@@ -52,12 +57,12 @@ export default function Prescription() {
   const prescriptions = useSelector((state) => state.prescription)
   const [id , setId] = useState(null)
   const [ mode , setMode] = useState('') 
+  const [error , setError] = useState("")
   const [prescription , setPrescription ] = useState({
     description  : "",
     patientId : "",
     dataPatient : {}
   })
-  const [error , setError] = useState("")
   
   
   useEffect(() => {
@@ -65,6 +70,31 @@ export default function Prescription() {
     dispatch(getPrescription())
   },[dispatch])
 
+
+  const openDeleteModal = (prescription) =>
+    openConfirmModal({
+      title: 'Supprimer la préscription',
+      centered: true,
+      children: (
+        <Text size="sm">
+          Êtes-vous sûr de vouloir supprimer la préscription de <strong>{prescription?.dataPatient?.firstname} {prescription?.dataPatient?.lastname}</strong>  ? Cette action est destructrice et vous aurez
+           pour contacter le support afin de restaurer vos données.
+        </Text>
+      ),
+      labels: { confirm: 'Supprimé', cancel: "Annulé" },
+      confirmProps: { color: 'red' },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: () => {
+        dispatch(deletePrescription(prescription._id))
+        .then(() => {
+          toast('Prescription supprimer avec success', {icon: '👏',});
+        })
+        .catch((error) => {
+          console.log(error);
+          toast('Error')
+        })
+      },
+  });
 
   return (
     <>
@@ -78,21 +108,23 @@ export default function Prescription() {
           <h1>Prescription</h1>
           <Grid justify="flex-end">
             <button
-            onClick={() => {
-              setPrescription({
-                description  : "",
-                patientId : "",
-                dataPatient : {}
-              })
-              setOpenedModal((open) => !open)
-              setError("")
-            }} 
+            onClick={() => navigate("/dashboard/addPrescription")
+              // {
+              // setPrescription({
+              //   description  : "",
+              //   patientId : "",
+              //   dataPatient : {}
+              // })
+              // setOpenedModal((open) => !open)
+              // setError("")
+              // }
+            } 
             style={btnStyle}
             >
-              Ajouter une préscription médicale
+              Effectuer une préscription médicale
             </button>
           </Grid>
-          {openedModal  && mode === "update" ? (
+          {/* {openedModal  && mode === "update" ? (
             <AddPrescription opened={openedModal}
               setOpened={setOpenedModal}
               title="Modifier une préscription"
@@ -115,7 +147,7 @@ export default function Prescription() {
               setError={setError}
             />
               
-            )}
+            )} */}
 
           <div>
           <Table>
@@ -137,21 +169,31 @@ export default function Prescription() {
                   <td>{prescription?.dataPatient?.phone}</td>
                   <td dangerouslySetInnerHTML={{__html :prescription.description}}/>
                   <td className='d-flex'>
+                    {/* <div>
+                    <Button onClick={openDeleteModal} color="red">Delete account</Button>;
+                    </div> */}
                     <div>
                       <AiOutlineDelete
-                        onClick={() => {
-                          setOuvre((open) => !open)
-                          setId(prescription._id)
-                        }}
+                        
+                        onClick={ 
+                          // openDeleteModal
+                          () => {
+                          // setOuvre((open) => !open)
+                          // setId(prescription._id)
+                          openDeleteModal(prescription)
+                        }
+                      }
                       />
                     </div>
                     <div className=''>
                     <AiOutlineEdit 
-                      onClick={() => {
-                        setOpenedModal((open) => !open)
-                        setMode('update')
-                        setPrescription(prescription)
-                      }}
+                      onClick={() => navigate(`/dashboard/prescription/${prescription?._id}`)
+                        // {
+                        // setOpenedModal((open) => !open)
+                        // setMode('update')
+                        // setPrescription(prescription)
+                        // }
+                      }
                     />
                     </div>
                     <div className=''>

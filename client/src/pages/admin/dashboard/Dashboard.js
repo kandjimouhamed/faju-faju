@@ -15,6 +15,8 @@ import Settings from "../../../components/Settings";
 import Prescription from "../../../components/Prescription";
 import Patients from "../../../components/Patients";
 import DetailPatient from "../../../components/DetailPatient";
+import AjoutPrescription from "../../../components/AjoutPrescription";
+import EditPrescription from "../../../components/EditPrescription";
 
 
 const Dashboard = () => {
@@ -48,6 +50,8 @@ const Dashboard = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
             <Route path="/prescription" element={<Prescription/>} />
+            <Route path="/addPrescription" element={<AjoutPrescription/>} />
+            <Route path="/Prescription/:id" element={<EditPrescription/>} />
             <Route path="/patient" element={<Patients/>} />
             <Route path="/detail-patient/:id" element={<DetailPatient/>} />
           </Routes>

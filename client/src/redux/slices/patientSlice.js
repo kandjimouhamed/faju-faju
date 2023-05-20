@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPatient, deletePatients, detailPatient, getPatients, updatePatients } from "../services/patientService";
+import { addPatient, deletePatients, getPatients, updatePatients } from "../services/patientService";
 
 const initialState = {
     data : [],
@@ -108,31 +108,6 @@ const patientSlice = createSlice({
         },
 
         [updatePatients.rejected] : (state , {payload}) => {
-            return {
-                ...state,
-                loading : false,
-                isSuccess : false,
-                message : payload
-            }
-        },
-        [detailPatient.pending] : (state) => {
-            return {
-                ...state,
-                loading : true
-            }
-        },
-
-        [detailPatient.fulfilled] : (state , {payload}) => {
-            // const updateItem = state.data.map((patient) => patient._id === payload.data._id ? payload.data : patient)
-            return {
-                ...state,
-                loading : false,
-                isSuccess : true,
-                data : payload
-            }
-        },
-
-        [detailPatient.rejected] : (state , {payload}) => {
             return {
                 ...state,
                 loading : false,

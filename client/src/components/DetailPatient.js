@@ -2,12 +2,14 @@ import { Badge, Box, Container, Divider, Grid } from '@mantine/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { detailPatient } from '../redux/services/patientService';
+import { detailPatient } from '../redux/services/detailsService';
+import localFrFormat from '../utils/functions/localFrFormat';
 
 function DetailPatient() {
   const { id } = useParams();
   const dispatch = useDispatch()
-  const statePatients = useSelector((state) => state.patients)
+  const statePatients = useSelector((state) => state.details)
+  console.log(statePatients.data.prescription);
 
   useEffect(() => {
     dispatch(detailPatient(id))
@@ -39,10 +41,17 @@ function DetailPatient() {
                 <Box p="sm">
                   <h4>Informations du consultation </h4>
                   <Grid style={{ fontSize: '0.8rem', fontWeight: '700' }} mt="sm">
-                        <Grid.Col span={12} sm={6}>Prénom : <Badge color="pink"></Badge></Grid.Col>
-                        <Grid.Col span={12} sm={6}>Nom : <Badge color="pink"></Badge></Grid.Col>
+                    {
+                        statePatients?.data?.prescription.map((prescription) => (
+                            <>
+                                <Grid.Col span={12} sm={12}>Date de consultation : {localFrFormat(prescription.createdAt)} <Badge color="pink"></Badge></Grid.Col>
+                                <Grid.Col span={12} sm={12}>Prescription: <Badge color="pink"></Badge></Grid.Col>
+                            </>
+                        ))
+                    }
+                        {/* <Grid.Col span={12} sm={6}>Nom : <Badge color="pink"></Badge></Grid.Col>
                         <Grid.Col span={12} sm={6}>Email : <Badge color="pink"></Badge></Grid.Col>
-                        <Grid.Col span={12} sm={6}>Teléphone : <Badge color="pink"></Badge></Grid.Col>
+                        <Grid.Col span={12} sm={6}>Teléphone : <Badge color="pink"></Badge></Grid.Col> */}
                     </Grid>
                 </Box>
 

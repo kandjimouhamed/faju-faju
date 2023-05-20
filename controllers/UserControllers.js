@@ -130,7 +130,8 @@ const AddPatient = async (req , res) => {
     // ! Verifier le phone existe
     const { phone } = user
 
-    const findUser = await UserModel.find({ phone })
+    const findUser = await UserModel.findOne({ phone : phone })
+    console.log(findUser , "findUser");
     if(findUser) return res.status(402).json({ error: "L'utilisateur exist deja" })
 
 

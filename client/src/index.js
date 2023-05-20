@@ -11,6 +11,8 @@ import './style.css'
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'react-quill/dist/quill.snow.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import { ModalsProvider } from '@mantine/modals';
 let persistor = persistStore(store)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,13 +20,15 @@ root.render(
   // <React.StrictMode>
   <BrowserRouter>
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <GoogleOAuthProvider clientId='959078892775-j765uh1b479arbpst6i07dbto6896lm9.apps.googleusercontent.com' >
-            <App />
-          </GoogleOAuthProvider>
-        </PersistGate>
-      </Provider>
+      <ModalsProvider labels={{ confirm: 'Submit', cancel: 'Cancel' }}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <GoogleOAuthProvider clientId='959078892775-j765uh1b479arbpst6i07dbto6896lm9.apps.googleusercontent.com' >
+              <App />
+            </GoogleOAuthProvider>
+          </PersistGate>
+        </Provider>
+      </ModalsProvider>
     </MantineProvider>
   </BrowserRouter>
   // </React.StrictMode>
