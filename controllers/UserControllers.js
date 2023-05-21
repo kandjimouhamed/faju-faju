@@ -119,6 +119,7 @@ const generateToken = (userId) => {
 
 const AddPatient = async (req , res) => {
     const user = {
+        idMedecin : req.body.idMedecin,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         phone: req.body.phone,
@@ -126,12 +127,12 @@ const AddPatient = async (req , res) => {
         password: req.body.password,
         role: "client"
     }
+    console.log(req.body);
 
     // ! Verifier le phone existe
     const { phone } = user
 
     const findUser = await UserModel.findOne({ phone : phone })
-    console.log(findUser , "findUser");
     if(findUser) return res.status(402).json({ error: "L'utilisateur exist deja" })
 
 
@@ -152,6 +153,7 @@ const AddPatient = async (req , res) => {
 const getPatient = async (req , res) => {
     try {
         const patient = await UserModel.find({ role: 'client' }).select("-password")
+        // const filterPatient = await 
         return res.status(200).json({data : patient , message : 'success'})
     } catch (error)  {
         console.log(error);

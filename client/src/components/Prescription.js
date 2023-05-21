@@ -55,6 +55,7 @@ export default function Prescription() {
   const [ouvre , setOuvre] = useState(false)
   const dispatch = useDispatch()
   const prescriptions = useSelector((state) => state.prescription)
+  const currentUser = useSelector((state) => state.user);
   const [id , setId] = useState(null)
   const [ mode , setMode] = useState('') 
   const [error , setError] = useState("")
@@ -63,7 +64,7 @@ export default function Prescription() {
     patientId : "",
     dataPatient : {}
   })
-  
+
   
   useEffect(() => {
     dispatch(getPatients())
@@ -77,8 +78,7 @@ export default function Prescription() {
       centered: true,
       children: (
         <Text size="sm">
-          Êtes-vous sûr de vouloir supprimer la préscription de <strong>{prescription?.dataPatient?.firstname} {prescription?.dataPatient?.lastname}</strong>  ? Cette action est destructrice et vous aurez
-           pour contacter le support afin de restaurer vos données.
+          Êtes-vous sûr de vouloir supprimer la préscription de <strong>{prescription?.dataPatient?.firstname} {prescription?.dataPatient?.lastname}</strong>  ?
         </Text>
       ),
       labels: { confirm: 'Supprimé', cancel: "Annulé" },
@@ -156,18 +156,20 @@ export default function Prescription() {
               <th>Prénom patient</th>
               <th>Nom patient</th>
               <th>Numéro téléphone</th>
-              <th>Prescription</th>
+              {/* <th>Prescription</th> */}
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {
-              prescriptions?.data.map((prescription) => (
+              prescriptions?.data
+              ?.filter((item) => item.userId === currentUser._id)
+              ?.map((prescription) => (
                 <tr key={prescription?._id}>
                   <td>{prescription?.dataPatient?.firstname}</td>
                   <td>{prescription?.dataPatient?.lastname}</td>
                   <td>{prescription?.dataPatient?.phone}</td>
-                  <td dangerouslySetInnerHTML={{__html :prescription.description}}/>
+                  {/* <td dangerouslySetInnerHTML={{__html :prescription.description}}/> */}
                   <td className='d-flex'>
                     {/* <div>
                     <Button onClick={openDeleteModal} color="red">Delete account</Button>;
@@ -197,7 +199,9 @@ export default function Prescription() {
                     />
                     </div>
                     <div className=''>
-                      <GrFormView />
+                      <GrFormView 
+                        onClick={() => navigate(`/dashboard/detail-prescription/${prescription?._id}`)}
+                      />
                     </div>
                   </td>
                 </tr>

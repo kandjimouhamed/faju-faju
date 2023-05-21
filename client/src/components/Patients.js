@@ -1,13 +1,15 @@
-import { Grid, Loader, Table, createStyles } from '@mantine/core'
+import { Grid, Loader, Table, Text, createStyles } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { btnStyle } from '../utils/linkStyle'
 import AddPatient from './AddPatient';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPatients } from '../redux/services/patientService';
+import { deletePatients, getPatients } from '../redux/services/patientService';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import ModalConfirm from './ModalConfirm';
 import { GrFormView } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
+import { openConfirmModal } from '@mantine/modals';
+import { toast } from 'react-hot-toast';
 
 
 const useStyles = createStyles((theme) => ({
@@ -49,11 +51,13 @@ function Patients() {
     const {classes}  = useStyles()
     const [openedModal, setOpenedModal] = useState(false);
     const statePatients = useSelector((state) => state.patients)
+    const currentUser = useSelector((state) => state.user);
     const [ouvre , setOuvre] = useState(false)
     const [id , setId] = useState(null)
     const [mode , setMode] = useState("")
     const dispatch = useDispatch()
     const [patients , setPatients] = useState({
+        idMedecin : "",
         firstname : "",
         lastname : "",
         phone : "",
@@ -72,6 +76,33 @@ function Patients() {
     navigate(`/dashboard/detail-patient/${id}`)
   }
 
+//   const filterPatients = statePatients?.data?.filter((patient) => patient._id === )
+
+
+  const openDeleteModal = (patient) =>
+  openConfirmModal({
+    title: 'Supprimer la préscription',
+    centered: true,
+    children: (
+      <Text size="sm">
+        Êtes-vous sûr de vouloir supprimer la préscription de <strong>{patient.firstname} {patient.lastname}</strong>  ?
+      </Text>
+    ),
+    labels: { confirm: 'Supprimé', cancel: "Annulé" },
+    confirmProps: { color: 'red' },
+    onCancel: () => console.log('Cancel'),
+    onConfirm: () => {
+      dispatch(deletePatients(patient._id))
+      .then(() => {
+        toast('Patient supprimer avec success', {icon: '👏',});
+      })
+      .catch((error) => {
+        console.log(error);
+        toast('Error')
+      })
+    },
+});
+
   return (
     <>
         {
@@ -88,6 +119,7 @@ function Patients() {
                         () => {
                             setOpenedModal((open) => !open)
                             setPatients({
+                                idMedecin : currentUser._id,
                                 firstname : "",
                                 lastname : "",
                                 phone : "",
@@ -140,7 +172,10 @@ function Patients() {
                         </thead>
                         <tbody>
                             {
-                                statePatients?.data.map((patient) => (
+
+                                statePatients?.data
+                                ?.filter((patient) => patient.idMedecin  === currentUser._id)
+                                ?.map((patient) => (
                                     <tr key={patient?._id}>
                                         <td>{patient?.firstname}</td>
                                         <td>{patient?.lastname}</td>
@@ -150,8 +185,9 @@ function Patients() {
                                     <div>
                                     <AiOutlineDelete
                                         onClick={() => {
-                                        setOuvre((open) => !open)
-                                        setId(patient._id)
+                                        // setOuvre((open) => !open)
+                                        // setId(patient._id)
+                                            openDeleteModal(patient)
                                         }}
                                     />
                                     </div>

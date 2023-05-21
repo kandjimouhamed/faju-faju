@@ -60,7 +60,7 @@ const Login = () => {
     return (
         <div className='form-signup--container'>
             <div className='form-left'>
-                <h1>Prenez votre rendez-vous</h1>
+                <h1>Faju</h1>
                 <img src={logo} alt="Appointement" />
             </div>
             <div style={{marginTop: '3rem'}} className='form-right'>

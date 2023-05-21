@@ -72,7 +72,6 @@ function EditPrescription() {
     ],
   };
 
-  console.log(prescriptions);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -17,12 +17,12 @@ const userSchema = new Schema({
     phone:{
         type: String,
         required: [true, "Please give the phone"],
-        // unique: true,
+        unique: true,
     },
     email:{
         type: String,
         // required: [true, "Please give the email"],
-        // unique: true,
+        unique: true,
     },
     password:{
         type: String,
@@ -31,6 +31,10 @@ const userSchema = new Schema({
     role: {
         type: String,
         required: [true, "Please give a role to the user"]
+    },
+    idMedecin : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User"
     }
 })
 

@@ -58,6 +58,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
     }
     const {classes} = useStyles()
     const dispatch = useDispatch()
+    const currentUser = useSelector((state) => state.user);
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -77,22 +78,6 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             })
   
           } else {
-            // try {
-            //   dispatch(addPatient(patients))
-            //   setOpened(false)
-            //   toast('Patient ajouté avec success', {icon: '👏',});
-            //   setPatients({
-            //       firstname : "",
-            //       lastname : "",
-            //       phone : "",
-            //       email : "",
-            //       password : "1234",
-            //       role: 'client'
-            //   })
-            // } catch (err) {
-            //   console.log(err);
-            //   toast(err.response.data.err)
-            // }
             dispatch(addPatient(patients))
             .then((res) => {
               if(res.type === "patient/addPatient/rejected") {
@@ -102,6 +87,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
                 setOpened(false)
                 toast('Patient ajouté avec success', {icon: '👏',});
                 setPatients({
+                    idMedecin : "",
                     firstname : "",
                     lastname : "",
                     phone : "",
