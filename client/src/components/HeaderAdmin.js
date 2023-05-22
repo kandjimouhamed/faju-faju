@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Home, Logout, NotificationOff, UserCircle } from 'tabler-icons-react'
-import { Menu ,Burger,Drawer, Group, Button, List, Navbar} from '@mantine/core'
+import { Menu ,Burger,Drawer, Group, Button, List, Navbar, createStyles} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearAvaiblities } from '../redux/slices/unAvaiblitiesSlice';
@@ -15,22 +15,27 @@ import userData from '../utils/userData';
 // import { useDisclosure } from '@mantine/hooks';
 // import { Drawer, Group, Button } from '@mantine/core';
 
+const useStyles = createStyles((theme) => ({
+  Notification : {
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display : "none"
+    } 
+  }
+}))
 
 const HeaderItem = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  console.log(opened)
   
   //gestion de la responsivite
   const [open1, setOpen1] = useState(false);
-  const [show, setShow] = useState(true);
-  console.log(open1)
+  const [show, setShow] = useState(true)
   // const handleClose = () => setShow(false);
   // const handleShow = () => {
   //   setShow(true);
   //   console.log('show')
   // }
    // End gestion de la responsivite
-  
+  const {classes} = useStyles()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(state => state.user)
@@ -64,7 +69,7 @@ const HeaderItem = () => {
     //   setShow(true)
 
     // }
-    console.log(show)
+    // console.log(show)
     const hundleResize = () => {
       if (window.innerWidth < 734 && open1 === false) {
         setOpen1(true);
@@ -76,7 +81,7 @@ const HeaderItem = () => {
     window.addEventListener("resize", hundleResize);
     // setShow(true)
   }, [open1]);
-  console.log(open)
+
 
 
   return (
@@ -101,13 +106,13 @@ const HeaderItem = () => {
             
       }
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <NotificationOff style={{ color: 'white' }} color='white' size={35} />
+        <NotificationOff className={classes.Notification} style={{ color: 'white' }} color='white' size={35} />
         <Menu shadow="md" width={200} color="white">
           <Menu.Target>
             <button style={{
               border: 'none',
               backgroundColor: 'transparent',
-              padding: '0.5rem 2rem',
+              padding: '0.5rem 0rem',
               cursor: 'pointer'
             }}>
               <span style={{
