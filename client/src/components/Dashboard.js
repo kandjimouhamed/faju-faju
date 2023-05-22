@@ -14,8 +14,8 @@ const Dashboard = () => {
     const [performed, setPerformed] = useState([])
     const [canceled, setCanceled] = useState([])
     const [coming, setComing] = useState([])
-
     useEffect(() => {
+       
         const performed = []
         const coming = []
         // !nbre de rdv confirmer
@@ -28,6 +28,7 @@ const Dashboard = () => {
                 }
             })
         // !nbre de rdv annuler
+        // console.log(performed)
         const canceled = appointments?.filter(appointment => appointment.isConfirmed === false)
         // !nbre de rdv a venir
         appointments

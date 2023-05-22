@@ -22,8 +22,7 @@ const ChooseAppointement = () => {
   const unAvaiblities = useSelector((state) => state.unavaiblities.data);
   const [unAvaiblity, setUnAvaiblity] = useState(null);
   const allAppointments = useSelector((state) => state.appointments);
-
-
+  // console.log(allAppointments.loading)
   const userId = user._id;
   const [appointments, setAppointments] = useState([]);
   const form = useForm({
@@ -104,6 +103,7 @@ const ChooseAppointement = () => {
     dispatch(getUnAvaiblities())
     dispatch(getAppointments())
     dispatch(getUsers())
+    console.log(dispatch(getAppointments()))
   }, [])
 
   useEffect(() => {
@@ -116,9 +116,6 @@ const ChooseAppointement = () => {
     else {
       setShowDescription(true)
     }
-
-   
-
     setUnAvaiblity(unAvaiblity);
     setAppointments(appointments);
   }, [allAppointments?.appointments, unAvaiblities, value]);
@@ -175,6 +172,7 @@ const ChooseAppointement = () => {
             Choisissez l'heure qui vous convient
           </span>
           <span></span>
+
           {!allAppointments.loading  ? (
             allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (          
               allAppointments.appointments?.map((appointment, index) => (

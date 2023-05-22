@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUnAvaiblity, getUnAvaiblities } from '../redux/services/unAvaiblitiesServices';
 import addSimpleAppointments from '../utils/functions/addSimpleAppointments';
 import { getAppointments } from '../redux/services/appointmentsServices';
-import { DatePicker } from '@mantine/dates';
+import { DatePicker, DateInput, DatePickerInput } from '@mantine/dates';
 import { IconAlertCircle } from '@tabler/icons';
 import { getOneBusyTimes } from '../redux/services/busyTimesServices';
 
@@ -123,13 +123,15 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
         const appointmentHours = addSimpleAppointments(timeStart, timeEnd, WORKSTARTAT, WORKENDAT, APPOINTMENT_DURATION, BREAK)
 
         setLoading(true)
-        let unAvaiblityId
+        // let unAvaiblityId
 
         dispatch(addUnAvaiblity(unAvaiblity))
             .then(res => {
-                console.log(res);
+                // console.log(res);
+
                 if (res.type === "unavaiblities/addUnAvaiblity/rejected") {
                     setError(true)
+                    // console.log('ok ok ok')
                     if(res.payload.data){
                         const result = res.payload.data.map(data => {
                             return `${data.startedAt} - ${data.endedAt}`
@@ -144,6 +146,7 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
                 }
                 if (res.type === "unavaiblities/addUnAvaiblity/fulfilled") {
                     setError(false)
+                    // console.log('nok nok nok')
                     successMsg("Indisponibilité ajoutée")
                     setOpened(false)
                     form.reset()
@@ -174,6 +177,7 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
                              />
                             {/* <DatePicker placeholder='Date' {...form.getInputProps('date')} excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6} /> */}
                         </Grid.Col>
+                       
                     </Grid>
                     <span className='modal-span'>Plage horaire</span>
                     <Grid justify="center">

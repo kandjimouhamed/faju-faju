@@ -13,6 +13,7 @@ import ChooseAppointement from "../../../components/ChooseAppointement";
 import UserAppointments from "../../../components/UserAppointments";
 import Settings from "../../../components/Settings";
 import Prescription from "../../../components/Prescription";
+import RendezVous from "../../../components/RendezVous";
 import Patients from "../../../components/Patients";
 import DetailPatient from "../../../components/DetailPatient";
 import AjoutPrescription from "../../../components/AjoutPrescription";
@@ -54,6 +55,7 @@ const Dashboard = () => {
             <Route path="/addPrescription" element={<AjoutPrescription/>} />
             <Route path="/Prescription/:id" element={<EditPrescription/>} />
             <Route path="/detail-prescription/:id" element={<DetailPrescription/>} />
+            <Route path="/rendezvous" element={<RendezVous/>} />
             <Route path="/patient" element={<Patients/>} />
             <Route path="/detail-patient/:id" element={<DetailPatient/>} />
           </Routes>
