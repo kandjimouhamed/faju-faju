@@ -168,7 +168,10 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
                     <span className='modal-span'>Date</span>
                     <Grid>
                         <Grid.Col>
-                            <DatePicker placeholder='Date' {...form.getInputProps('date')} />
+                            <DatePicker placeholder='Date' {...form.getInputProps('date')}
+                                inputFormat="MM/DD/YYYY"
+                                labelFormat="MM/YYYY"
+                             />
                             {/* <DatePicker placeholder='Date' {...form.getInputProps('date')} excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6} /> */}
                         </Grid.Col>
                     </Grid>
