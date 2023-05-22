@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import instance from '../axios/globalInstance';
 // import { updatePatients } from '../redux/services/patientService';
 import { toast } from 'react-hot-toast';
+import { updateRendezvous } from '../redux/services/rendezvousService';
 
 
 
@@ -47,19 +48,19 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
         if(rendezvous.nomCompletPatient === "" || rendezvous.dateRendezvous ==="" || rendezvous.description==="") {
           setError("Viellez remplire ce champ .")
         } else {
-        //   if(rendezvous._id) {
-        //     dispatch(updatePatients(rendezvous))
-        //     .then(() => {
-        //       setOpened(false)
-        //       toast('Patient modifié avec success', {icon: '👏',});
-        //     })
-        //     .catch((err) => {
-        //       console.log(err);
-        //       toast('Error')
-        //     })
+          if(rendezvous._id) {
+            dispatch(updateRendezvous(rendezvous))
+            .then(() => {
+              setOpened(false)
+              toast('Rendez vous modifié avec success', {icon: '👏',});
+            })
+            .catch((err) => {
+              console.log(err);
+              toast('Error')
+            })
   
-        //   } 
-        //   else {
+          } 
+          else {
             try {
                 await instance.post("/rendezvous", rendezvous) 
                 setOpened(false)
@@ -76,7 +77,7 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
                 console.log(err.response.data);
                 toast(err.response.data.error)
             }
-        //   }
+          }
         }
     }
   return (

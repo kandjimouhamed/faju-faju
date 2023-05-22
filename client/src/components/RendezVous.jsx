@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlineDelete,AiOutlineEdit } from 'react-icons/ai'
 import { Grid, Table } from '@mantine/core'
 import { btnStyle } from '../utils/linkStyle'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRendezvous } from '../redux/services/rendezvousService'
 import AddRendezvous from './AddRendezvous'
+import ModalConfirm from './ModalConfirm'
 
 export default function RendezVous() {
   const [openedModal, setOpenedModal] = useState(false);
   const [id , setId] = useState(null)
   const [mode , setMode] = useState("")
+  const [ouvre , setOuvre] = useState(false)
   const dispatch = useDispatch()
   const [rendezvous , setRendezvous] = useState({
     nomComplet : "",
@@ -86,8 +88,15 @@ const [error , setError] = useState("")
               <td>{rv.nomCompletPatient}</td>
               <td>{rv.dateRendezvous}</td>
               <td>{rv.description}</td>
-              <td dangerouslySetInnerHTML={{__html : 'description'}}/>
+              {/* <td dangerouslySetInnerHTML={{__html : 'description'}}/> */}
               <td>
+              <AiOutlineEdit
+                    onClick={() => {
+                        setOpenedModal((open) => !open)
+                        setMode('update')
+                        setRendezvous(rv)
+                    }}
+                    />
                 <AiOutlineDelete
                 />
               </td>
@@ -99,6 +108,16 @@ const [error , setError] = useState("")
 
       </tbody>
     </Table>
+    {   
+        ouvre && <ModalConfirm
+        setOuvre={setOuvre} 
+        ouvre={ouvre}
+        title={'Confirmer la suppréssion'} 
+        contenu={'Vous vous supprimer ce Rendez vous.'}
+        rendezvous={"rendezvous"}
+        // handleDelete={handleDelete}
+        id={id} />
+        }
      
       </div>
     </div>
