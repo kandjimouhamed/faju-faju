@@ -98,6 +98,10 @@ const [error , setError] = useState("")
                     }}
                     />
                 <AiOutlineDelete
+                 onClick={() => {
+                  setOuvre((open) => !open)
+                  setId(rv._id)
+                  }}
                 />
               </td>
        </tr>

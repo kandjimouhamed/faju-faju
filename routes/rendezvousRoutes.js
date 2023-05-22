@@ -5,7 +5,7 @@ const router = express.Router()
 router.get('/' , getRendezvous)
 router.post('/' , addRendezvous)
 router.put('/:id', updateRendezvous);
-// router.delete('/:id', deleteRendezvous);
+router.delete('/:id', deleteRendezvous);
 
 
 

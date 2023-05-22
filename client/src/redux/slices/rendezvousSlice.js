@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addRendezvous, getRendezvous, updateRendezvous} from "../services/rendezvousService";
+import { addRendezvous, getRendezvous, updateRendezvous, deleteRendezvous} from "../services/rendezvousService";
 
 const initialState = {
     data : [],
@@ -65,31 +65,31 @@ const rendezvousSlice = createSlice({
                 message : payload
             }
         },
-        // [deletePatients.pending] : (state) => {
-        //     return {
-        //         ...state,
-        //         loading : true
-        //     }
-        // },
+        [deleteRendezvous.pending] : (state) => {
+            return {
+                ...state,
+                loading : true
+            }
+        },
 
-        // [deletePatients.fulfilled] : (state , {payload}) => {
-        //     const deleteItem = state.data.filter((patient) => patient._id !== payload.data._id)
-        //     return {
-        //         ...state,
-        //         loading : false,
-        //         isSuccess : true,
-        //         data : deleteItem
-        //     }
-        // },
+        [deleteRendezvous.fulfilled] : (state , {payload}) => {
+            const deleteItem = state.data.filter((rendezvous) => rendezvous._id !== payload.data._id)
+            return {
+                ...state,
+                loading : false,
+                isSuccess : true,
+                data : deleteItem
+            }
+        },
 
-        // [deletePatients.rejected] : (state , {payload}) => {
-        //     return {
-        //         ...state,
-        //         loading : false,
-        //         isSuccess : false,
-        //         message : payload
-        //     }
-        // },
+        [deleteRendezvous.rejected] : (state , {payload}) => {
+            return {
+                ...state,
+                loading : false,
+                isSuccess : false,
+                message : payload
+            }
+        },
         [updateRendezvous.pending] : (state) => {
             return {
                 ...state,

@@ -70,5 +70,19 @@ const updateRendezvous = async (req , res) => {
     // }
     
 }
+const deleteRendezvous = async (req , res) => {
 
-module.exports = {addRendezvous, getRendezvous, updateRendezvous}
+    const verifieRendewvous = await RendezvousModel.findById(req.params.id)
+    if(!verifieRendewvous) return res.status(404).json({message : "Rendez vous introuvable."})
+    // console.log(req.body);
+
+    try {
+        const rendezvous = await RendezvousModel.findByIdAndDelete(req.params.id)
+        return res.status(200).json({data : rendezvous , message : "Rendez vous supprimé avec success."})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message : error.message})
+    }
+}
+
+module.exports = {addRendezvous, getRendezvous, updateRendezvous, deleteRendezvous}

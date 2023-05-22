@@ -27,18 +27,18 @@ const addRendezvous = createAsyncThunk(
     }
   );
 
-// const deletePatients = createAsyncThunk(
-//     'patient/deletePatient',
-//     async(id , {rejectWithValue}) => {
-//         try {
-//             const {data} = await instance.delete(`/patients/${id}`)
-//             return data
-//         } catch (error) {
-//             console.log(error);
-//             return rejectWithValue(error.response.data)
-//         }
-//     }
-// )
+const deleteRendezvous = createAsyncThunk(
+    'patient/deleteRendezvous',
+    async(id , {rejectWithValue}) => {
+        try {
+            const {data} = await instance.delete(`/rendezvous/${id}`)
+            return data
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
   
 
 const updateRendezvous = createAsyncThunk(
@@ -54,4 +54,4 @@ const updateRendezvous = createAsyncThunk(
     }
 )
 
-export {addRendezvous, getRendezvous, updateRendezvous}
+export {addRendezvous, getRendezvous, updateRendezvous, deleteRendezvous}
