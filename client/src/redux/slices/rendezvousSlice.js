@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addRendezvous, getRendezvous } from "../services/rendezvousService";
+import { addRendezvous, getRendezvous, updateRendezvous} from "../services/rendezvousService";
 
 const initialState = {
     data : [],
@@ -11,7 +11,7 @@ const initialState = {
 }
 
 const rendezvousSlice = createSlice({
-    name : "rebdezvous",
+    name : "rendezvous",
     initialState,
     extraReducers : {
         [getRendezvous.pending] : (state) => {
@@ -90,31 +90,31 @@ const rendezvousSlice = createSlice({
         //         message : payload
         //     }
         // },
-        // [updatePatients.pending] : (state) => {
-        //     return {
-        //         ...state,
-        //         loading : true
-        //     }
-        // },
+        [updateRendezvous.pending] : (state) => {
+            return {
+                ...state,
+                loading : true
+            }
+        },
 
-        // [updatePatients.fulfilled] : (state , {payload}) => {
-        //     const updateItem = state.data.map((patient) => patient._id === payload.data._id ? payload.data : patient)
-        //     return {
-        //         ...state,
-        //         loading : false,
-        //         isSuccess : true,
-        //         data : updateItem
-        //     }
-        // },
+        [updateRendezvous.fulfilled] : (state , {payload}) => {
+            const updateItem = state.data.map((rendezvous) => rendezvous._id === payload.data._id ? payload.data : rendezvous)
+            return {
+                ...state,
+                loading : false,
+                isSuccess : true,
+                data : updateItem
+            }
+        },
 
-        // [updatePatients.rejected] : (state , {payload}) => {
-        //     return {
-        //         ...state,
-        //         loading : false,
-        //         isSuccess : false,
-        //         message : payload
-        //     }
-        // }
+        [updateRendezvous.rejected] : (state , {payload}) => {
+            return {
+                ...state,
+                loading : false,
+                isSuccess : false,
+                message : payload
+            }
+        }
     }
 })
 

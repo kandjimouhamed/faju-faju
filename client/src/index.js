@@ -11,6 +11,7 @@ import './style.css'
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'react-quill/dist/quill.snow.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 let persistor = persistStore(store)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

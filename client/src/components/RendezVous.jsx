@@ -32,7 +32,7 @@ const [error , setError] = useState("")
           () => {
               setOpenedModal((open) => !open)
               setRendezvous({
-                nomComplet : "",
+                nomCompletPatient : "",
                 dateRendezvous : "",
                 description: "" 
               })

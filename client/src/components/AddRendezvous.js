@@ -1,6 +1,6 @@
 import { Alert, Input, InputBase, Modal, Tooltip, createStyles, Textarea } from '@mantine/core'
-import { DateInput  } from '@mantine/dates';
-import React from 'react'
+import { DateInput, DatePickerInput  } from '@mantine/dates';
+import React, { useState } from 'react'
 import { btnStyle } from '../utils/linkStyle';
 import { IconAlertCircle, IconAt, IconBrandTwitter } from '@tabler/icons';
 import { IMaskInput } from 'react-imask';
@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import instance from '../axios/globalInstance';
 // import { updatePatients } from '../redux/services/patientService';
 import { toast } from 'react-hot-toast';
+
 
 
 const useStyles = createStyles((theme) => ({
@@ -18,6 +19,7 @@ const useStyles = createStyles((theme) => ({
   }));
 
 function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous , error , setError}) {
+
 
     // ############################################## STYLE DE L'APP #############################################
     const modules = {
@@ -40,6 +42,7 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        console.log(rendezvous)
 
         if(rendezvous.nomCompletPatient === "" || rendezvous.dateRendezvous ==="" || rendezvous.description==="") {
           setError("Viellez remplire ce champ .")
@@ -115,12 +118,15 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
           )
         }
       </Input.Wrapper>
-      {/* <Input.Wrapper className={classes.input} id={'3'} label="Chioisir votre date de Rendez vous" required maw={320} mx="auto">
-        <Input
-        //   icon={<IconBrandTwitter size="1rem" />}
+     
+     <Input.Wrapper className={classes.input} id={'3'} label="Chioisir votre date de Rendez vous" required maw={320} mx="auto">
+      
+        {/* <Input
+      
         value={rendezvous.dateRendezvous}
-        onChange={(e) => setRendezvous({...rendezvous , dateRendezvous : e.target.value})}
-            placeholder="Nom"
+        onChange={(e) => setRendezvous({...rendezvous , dateRendezvous : e.target.valueAsDate})}
+            placeholder="date"
+            type ='date'
             rightSection={
                 <Tooltip label="This is public" position="top-end" withArrow>
                 <div>
@@ -128,7 +134,7 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
                 </div>
                 </Tooltip>
             }
-        /> 
+        />  */}
         {
         error === "Viellez remplire ce champ ." && rendezvous.dateRendezvous === "" && (
             <Alert icon={<IconAlertCircle size="1rem" />} color="red">
@@ -136,7 +142,13 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
             </Alert>
           )
         }
-      </Input.Wrapper> */}
+      </Input.Wrapper>
+      {/* <DateInput 
+  
+             value={rendezvous.dateRendezvous}
+             onChange={(e) => setRendezvous({...rendezvous , dateRendezvous : e.target.value})}
+            placeholder="Date de Rendez vous"
+            /> */}
       {/* <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre Description" required maw={320} mx="auto">
         <Input
             value={rendezvous.description}
@@ -158,14 +170,21 @@ function AddRendezvous({opened , setOpened , title , rendezvous , setRendezvous 
           )
         }
       </Input.Wrapper> */}
-          <DateInput 
+          {/* <DatePickerInput 
+           className={classes.input}
              value={rendezvous.dateRendezvous}
-             valueFormat="DD/MM/YYYY HH:mm:ss"
-             onChange={(e) => setRendezvous({...rendezvous , dateRendezvous : e.target.value})}
+            //  valueFormat="DD/MM/YYYY"
+            //  onChange={(e) => setRendezvous({...rendezvous , dateRendezvous : e.target.value})}
              label="Chioisir votre date de Rendez vous"
             placeholder="Date de Rendez vous"
-           
-            />
+            /> */}
+            <div>
+              <input type="date" placeholder = 'date de rendez vous'
+               value={rendezvous.dateRendezvous}
+               name = 'dateRendezvous'
+             onChange={(e) => setRendezvous({...rendezvous , dateRendezvous : e.target.value})} />
+            </div>
+     
       <Textarea
        value={rendezvous.description}
        onChange={(e) => setRendezvous({...rendezvous , description : e.target.value})}

@@ -41,17 +41,17 @@ const addRendezvous = createAsyncThunk(
 // )
   
 
-// const updatePatients = createAsyncThunk(
-//     'patient/updatePatient',
-//     async(patient , {rejectWithValue}) => {
-//         try {
-//             const {data} = await instance.put(`/patients/${patient._id}` , patient)
-//             return data
-//         } catch (error) {
-//             console.log(error);
-//             return rejectWithValue(error.response.data)
-//         }
-//     }
-// )
+const updateRendezvous = createAsyncThunk(
+    'rendezvous/updateRendezvous',
+    async(rendezvous , {rejectWithValue}) => {
+        try {
+            const {data} = await instance.put(`/rendezvous/${rendezvous._id}` , rendezvous)
+            return data
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
 
-export {addRendezvous, getRendezvous}
+export {addRendezvous, getRendezvous, updateRendezvous}
