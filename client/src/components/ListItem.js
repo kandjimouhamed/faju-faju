@@ -3,9 +3,10 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
-const ListItem = ({to, icon, label, setShow,opened, onClose,close}) => {
+const ListItem = ({to, icon, label, setShow,opened, setOpened , onClose,close}) => {
     const fermer =()=>{
-        onClose = {close}
+        setOpened()
+        // onClose = {close}
         // setShow(false)
         // opened = false
         // console.log(opened)
@@ -18,14 +19,14 @@ const ListItem = ({to, icon, label, setShow,opened, onClose,close}) => {
                
             <NavLink 
             // onClick={()=> setShow(false)}
-            onClick={()=>fermer()}
+            // onClick={()=>fermer()}
+            onClick={() => setOpened(false)}
             // onClose = {close}
            
             style={({ isActive }) =>
-              isActive ? {backgroundColor: isAdmin ? '#DB3C4E': '#3F73D7', borderRadius: '5px', color: 'white', width: '200px'} : {width: '200px'}
+              isActive ? {backgroundColor: isAdmin ? '#DB3C4E': '#3F73D7', borderRadius: '5px', color: 'white', width: '100%'} : {width: '100%'}
             } 
-            
-            
+        
             className={className} to={to}
             
             end

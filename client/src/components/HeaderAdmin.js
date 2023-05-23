@@ -55,11 +55,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const HeaderItem = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+  // const [opened, { open, close }] = useDisclosure(false);
 
   //gestion de la responsivite
   const [open1, setOpen1] = useState(false);
   const [show, setShow] = useState(true);
+  const [opened, setOpened] = useState(false);
   // const handleClose = () => setShow(false);
   // const handleShow = () => {
   //   setShow(true);
@@ -139,7 +140,7 @@ const HeaderItem = () => {
 
 
           <Group className={classes.Burger} position="center">
-            <Burger color="#fff" onClick={open} />
+            <Burger color="#fff" onClick={() => setOpened(true)} />
           </Group>
 
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -201,8 +202,11 @@ const HeaderItem = () => {
         </div>
         
       </header>
-      {show === true || (open1 === true && show === false) ? (
-        <Drawer className={classes.Drawer} opened={opened} onClose={close}>
+        <Drawer 
+          className={classes.Drawer}
+          opened={opened}
+          onClose={() => setOpened(false)}
+          >
           {/* <Navbar className='navbar' sx={{ minHeight: '100vh' }} width={{
                 // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
                 sm: 200,
@@ -222,15 +226,14 @@ const HeaderItem = () => {
                     {...data}
                     setShow={setShow}
                     opened={opened}
-                    onClose={close}
+                    setOpened={setOpened}
+                    // onClose={close}
                   />
                 ))}
           </List>
           {/* </Navbar> */}
         </Drawer>
-      ) : (
-        <></>
-      )}
+
 
       {/* <Group position="center">
         <Button onClick={open}>Open Drawer</Button>

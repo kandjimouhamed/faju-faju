@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlineDelete,AiOutlineEdit } from 'react-icons/ai'
-import { Grid, Table } from '@mantine/core'
+import { Grid, ScrollArea, Table, createStyles } from '@mantine/core'
 import { btnStyle } from '../utils/linkStyle'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRendezvous } from '../redux/services/rendezvousService'
 import AddRendezvous from './AddRendezvous'
 import ModalConfirm from './ModalConfirm'
 
+
+const useStyles = createStyles((theme) => ({
+  Table: {
+    width: "100%",
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      width: 600,
+    },
+  }
+}))
+
 export default function RendezVous() {
+
+  const {classes} = useStyles()
   const [openedModal, setOpenedModal] = useState(false);
   const [id , setId] = useState(null)
   const [mode , setMode] = useState("")
@@ -71,47 +83,50 @@ const [error , setError] = useState("")
 
 
       <div>
-      <Table>
-      <thead>
-        <tr>
-          <th>Nom complet </th>
-          <th>Date Rendez-vous</th>
-          <th>Exisences</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          stateRendezvous?.data.map((rv)=>(
+        <ScrollArea>
+        <Table className={classes.Table}>
+        <thead>
+          <tr>
+            <th>Nom complet </th>
+            <th>Date Rendez-vous</th>
+            <th>Exisences</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            stateRendezvous?.data.map((rv)=>(
 
-       <tr key = {rv._id}>
-              <td>{rv.nomCompletPatient}</td>
-              <td>{rv.dateRendezvous}</td>
-              <td>{rv.description}</td>
-              {/* <td dangerouslySetInnerHTML={{__html : 'description'}}/> */}
-              <td>
-              <AiOutlineEdit
-                    onClick={() => {
-                        setOpenedModal((open) => !open)
-                        setMode('update')
-                        setRendezvous(rv)
+        <tr key = {rv._id}>
+                <td>{rv.nomCompletPatient}</td>
+                <td>{rv.dateRendezvous}</td>
+                <td>{rv.description}</td>
+                {/* <td dangerouslySetInnerHTML={{__html : 'description'}}/> */}
+                <td>
+                <AiOutlineEdit
+                      onClick={() => {
+                          setOpenedModal((open) => !open)
+                          setMode('update')
+                          setRendezvous(rv)
+                      }}
+                      />
+                  <AiOutlineDelete
+                  onClick={() => {
+                    setOuvre((open) => !open)
+                    setId(rv._id)
                     }}
-                    />
-                <AiOutlineDelete
-                 onClick={() => {
-                  setOuvre((open) => !open)
-                  setId(rv._id)
-                  }}
-                />
-              </td>
-       </tr>
-          ))
-        }
-         
-      
+                  />
+                </td>
+        </tr>
+            ))
+          }
+          
+        
 
-      </tbody>
-    </Table>
+        </tbody>
+      </Table>
+
+        </ScrollArea>
     {   
         ouvre && <ModalConfirm
         setOuvre={setOuvre} 

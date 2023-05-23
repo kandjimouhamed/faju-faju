@@ -1,5 +1,5 @@
 import React from "react";
-import { AppShell, Header } from "@mantine/core";
+import { AppShell, Header, createStyles } from "@mantine/core";
 import NavbarMantaine from "../../../components/NavbarMantaine";
 import AdminHome from "../../../components/AdminHome";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
@@ -20,8 +20,21 @@ import AjoutPrescription from "../../../components/AjoutPrescription";
 import EditPrescription from "../../../components/EditPrescription";
 import DetailPrescription from "../../../components/DetailPrescription";
 
+const useStyles = createStyles((theme) => ({
+  Dashboard : {
+    width : '80%',
+    justifyContent : "end",
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      width : '100%'
+    },
+    marginLeft : 'auto',
+  }
+}))
 
 const Dashboard = () => {
+
+  const {classes} = useStyles()
   const user = useSelector((state) => state.user);
   const userRole = user?.role;
   // const navigate = useNavigate()
@@ -42,7 +55,7 @@ const Dashboard = () => {
       }
     >
       {/* Your application here */}
-      <div style={{ padding: "0rem", color: "white" }}>
+      <div className={classes.Dashboard} style={{ padding: "0rem", color: "white" }}>
         {userRole === "admin" ? (
           <Routes>
             <Route path="" element={<AdminHome />} />

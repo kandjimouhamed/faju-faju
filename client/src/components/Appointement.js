@@ -235,6 +235,7 @@ const Appointement = () => {
                 </button>
               </div>
               </ScrollArea>
+              
               <Table striped size="lg" variant="dark">
                 <thead className="a-thead">
                   <tr>

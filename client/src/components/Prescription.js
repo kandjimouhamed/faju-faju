@@ -76,6 +76,12 @@ const useStyles = createStyles((theme) => ({
   scrolled: {
     boxShadow: theme.shadows.sm,
   },
+  Table: {
+    width: "100%",
+    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+      width: 600,
+    },
+  },
 }));
 
 export default function Prescription() {
@@ -85,14 +91,6 @@ export default function Prescription() {
   const dispatch = useDispatch();
   const prescriptions = useSelector((state) => state.prescription);
   const currentUser = useSelector((state) => state.user);
-  const [id, setId] = useState(null);
-  const [mode, setMode] = useState("");
-  const [error, setError] = useState("");
-  const [prescription, setPrescription] = useState({
-    description: "",
-    patientId: "",
-    dataPatient: {},
-  });
 
   useEffect(() => {
     dispatch(getPatients());
@@ -146,10 +144,18 @@ export default function Prescription() {
             </button>
           </Grid>
           <ScrollArea
-            h={300}
-            onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+            // h={300}
+            // onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+            // style={{ width: '100%'}}
+            // width={{
+            //   sm : '300',
+            //   base : "100%"
+            // }}
           >
-            <Table miw={1000}>
+            <Table
+              className={classes.Table}
+              // style={{ width: 600 }}
+            >
               <thead
                 className={cx(classes.header, { [classes.scrolled]: scrolled })}
               >
@@ -169,58 +175,33 @@ export default function Prescription() {
                       <td>{prescription?.dataPatient?.lastname}</td>
                       <td>{prescription?.dataPatient?.phone}</td>
                       <td className="">
-                      <Grid>
-                        <Grid.Col span={4}>
-                          <AiOutlineDelete
-                            onClick={() => {
-                              openDeleteModal(prescription);
-                            }}
-                          />
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                        <AiOutlineEdit
-                            onClick={() =>
-                              navigate(
-                                `/dashboard/prescription/${prescription?._id}`
-                              )
-                            }
-                          />
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                        <GrFormView
-                            onClick={() =>
-                              navigate(
-                                `/dashboard/detail-prescription/${prescription?._id}`
-                              )
-                            }
-                          />
-                        </Grid.Col>
-                      </Grid>
-                        {/* <div>
-                          <AiOutlineDelete
-                            onClick={() => {
-                              openDeleteModal(prescription);
-                            }}
-                          />
-                        </div>
-                        <div className="">
-                          <AiOutlineEdit
-                            onClick={() =>
-                              navigate(
-                                `/dashboard/prescription/${prescription?._id}`
-                              )
-                            }
-                          />
-                        </div>
-                        <div className="">
-                          <GrFormView
-                            onClick={() =>
-                              navigate(
-                                `/dashboard/detail-prescription/${prescription?._id}`
-                              )
-                            }
-                          />
-                        </div> */}
+                        <Grid>
+                          <Grid.Col span={4}>
+                            <AiOutlineDelete
+                              onClick={() => {
+                                openDeleteModal(prescription);
+                              }}
+                            />
+                          </Grid.Col>
+                          <Grid.Col span={4}>
+                            <AiOutlineEdit
+                              onClick={() =>
+                                navigate(
+                                  `/dashboard/prescription/${prescription?._id}`
+                                )
+                              }
+                            />
+                          </Grid.Col>
+                          <Grid.Col span={4}>
+                            <GrFormView
+                              onClick={() =>
+                                navigate(
+                                  `/dashboard/detail-prescription/${prescription?._id}`
+                                )
+                              }
+                            />
+                          </Grid.Col>
+                        </Grid>
                       </td>
                     </tr>
                   ))}

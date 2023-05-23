@@ -8,7 +8,8 @@ import userData from '../utils/userData';
 
 const useStyles = createStyles((theme) => ({
   Navbar : {
-    // display : "flex",
+    display : "flex",
+    width : "20%",
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
       display : "none"
     } 
@@ -40,18 +41,19 @@ const NavbarMantaine = () => {
     return (  
 
             <Navbar className={classes.Navbar} sx={{ minHeight: '100vh' }} 
-            width={{
-                // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
-                sm: 250,
+            // width={{
+            //     // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
+            //     sm: 250,
     
-                // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
-                // md: 250,
+            //     // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
+            //     // md: 250,
 
-                // md : 0, 
+            //     // md : 0, 
     
-                // When other breakpoints do not match base width is used, defaults to 100%
-                base: 200,
-            }} p="lg"
+            //     // When other breakpoints do not match base width is used, defaults to 100%
+            //     base: 200,
+            // }}
+             p="lg"
             >
                 <List
                     spacing="lg"
