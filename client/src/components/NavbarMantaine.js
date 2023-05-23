@@ -1,12 +1,24 @@
-import { List, Navbar } from '@mantine/core'
+import { List, Navbar, createStyles } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import adminData from '../utils/adminData'
 import ListItem from './ListItem'
 import { useSelector } from 'react-redux';
 import userData from '../utils/userData';
 
+
+const useStyles = createStyles((theme) => ({
+  Navbar : {
+    // display : "flex",
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display : "none"
+    } 
+  }
+}))
+
+
 const NavbarMantaine = () => {
      //gestion de la responsivite
+     const {classes} = useStyles()
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -26,18 +38,21 @@ const NavbarMantaine = () => {
         window.addEventListener("resize", hundleResize);
       }, [open]);
     return (  
-        (open === false )?
-           (
-            <Navbar className='navbar' sx={{ minHeight: '100vh' }} width={{
+
+            <Navbar className={classes.Navbar} sx={{ minHeight: '100vh' }} 
+            width={{
                 // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
-                sm: 200,
+                sm: 250,
     
                 // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
-                lg: 250,
+                // md: 250,
+
+                // md : 0, 
     
                 // When other breakpoints do not match base width is used, defaults to 100%
                 base: 200,
-            }} p="lg">
+            }} p="lg"
+            >
                 <List
                     spacing="lg"
                     size="md"
@@ -53,10 +68,6 @@ const NavbarMantaine = () => {
                     }
                 </List>
             </Navbar>
-           ): <></>)
-        
-           
-    
-}
+)}
 
 export default React.memo(NavbarMantaine)

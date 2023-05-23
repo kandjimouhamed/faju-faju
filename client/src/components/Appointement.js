@@ -1,4 +1,4 @@
-import { Badge, Input, Loader, Modal, Table } from "@mantine/core";
+import { Badge, Input, Loader, Modal, ScrollArea, Table } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { convertDate, getTodayDate } from "../utils/functions/dates";
 import { FcApproval, FcCancel } from "react-icons/fc";
@@ -181,6 +181,7 @@ const Appointement = () => {
           // allAppointments?.appointments ? (
             allAppointments?.appointments?.filter(appointment => appointment?.userId !== null).length !== 0 ? (
             <>
+              <ScrollArea>
               <div className="table-container--time">
                 <button
                   style={{
@@ -233,6 +234,7 @@ const Appointement = () => {
                   Annulés
                 </button>
               </div>
+              </ScrollArea>
               <Table striped size="lg" variant="dark">
                 <thead className="a-thead">
                   <tr>

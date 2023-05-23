@@ -42,7 +42,7 @@ const Dashboard = () => {
       }
     >
       {/* Your application here */}
-      <div style={{ padding: "0.8rem", color: "white" }}>
+      <div style={{ padding: "0rem", color: "white" }}>
         {userRole === "admin" ? (
           <Routes>
             <Route path="" element={<AdminHome />} />
