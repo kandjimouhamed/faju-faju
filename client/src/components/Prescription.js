@@ -175,15 +175,15 @@ export default function Prescription() {
                       <td>{prescription?.dataPatient?.lastname}</td>
                       <td>{prescription?.dataPatient?.phone}</td>
                       <td className="">
-                        <Grid>
-                          <Grid.Col span={4}>
+                        <Grid style={{padding : '5px' , justifyContent : 'space-around' , alignItems : 'center'}}>
+                          <Grid.Col span={2}>
                             <AiOutlineDelete
                               onClick={() => {
                                 openDeleteModal(prescription);
                               }}
                             />
                           </Grid.Col>
-                          <Grid.Col span={4}>
+                          <Grid.Col span={2}>
                             <AiOutlineEdit
                               onClick={() =>
                                 navigate(
@@ -192,7 +192,7 @@ export default function Prescription() {
                               }
                             />
                           </Grid.Col>
-                          <Grid.Col span={4}>
+                          <Grid.Col span={2}>
                             <GrFormView
                               onClick={() =>
                                 navigate(

@@ -189,7 +189,7 @@ function Patients() {
                         <td>{patient?.phone}</td>
                         {/* <td>{patient?.email}</td> */}
                         <td>
-                          <Grid>
+                          <Grid style={{padding : "5px"}}>
                             <Grid.Col span={4}>
                               <AiOutlineDelete
                                 onClick={() => {
