@@ -172,11 +172,9 @@ const ChooseAppointement = () => {
             Choisissez l'heure qui vous convient
           </span>
           <span></span>
-
           {!allAppointments.loading  ? (
             allAppointments.appointments?.length !== 0 && unAvaiblity !== undefined ? (          
               allAppointments.appointments?.map((appointment, index) => (
-
                 <button
                   id={appointment._id}
                   title={

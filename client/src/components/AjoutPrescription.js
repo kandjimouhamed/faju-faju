@@ -37,6 +37,12 @@ const useStyles = createStyles((theme) => ({
   input: {
     margin: "20px 0",
   },
+  ButtonAjoute : {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
+      marginTop : '100px'
+    },
+
+  }
 }));
 
 function AjoutPrescription() {
@@ -121,7 +127,7 @@ function AjoutPrescription() {
   };
 
   const editorStyle = {
-    height: "350px",
+    height: "80vh",
   };
 
   return (
@@ -134,8 +140,8 @@ function AjoutPrescription() {
             id={"3"}
             label="Selectionnez un patient"
             required
-            maw={320}
-            mx="auto"
+            // maw={320}
+            // mx="auto"
           >
             <Select
               placeholder="Choisissez un patient"
@@ -158,8 +164,8 @@ function AjoutPrescription() {
             id={"3"}
             label="Description du medecin"
             required
-            maw={320}
-            mx="auto"
+            // maw={320}
+            // mx="auto"
           >
             <ReactQuill
               theme="snow"
@@ -181,8 +187,9 @@ function AjoutPrescription() {
               </Alert>
             ) : null}
           </Input.Wrapper>
+          <div className={classes.ButtonAjoute}>
           <button
-            style={{ ...btnStyle, width: "100%", padding: "0.8rem" }}
+            style={{ ...btnStyle, width: "100%", padding: "0.8rem" , }}
             type="submit"
           >
             {prescriptions.addPrescriptionStatus !== "pending" ? (
@@ -191,6 +198,8 @@ function AjoutPrescription() {
                 <Loader color="white" variant="dots" />
               )}
           </button>
+
+          </div>
         </form>
       </Container>
     </div>

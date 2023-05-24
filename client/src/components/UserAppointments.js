@@ -33,7 +33,8 @@ const UserAppointments = () => {
     <div>
       {!allUnAppointments.loading ? (
         appointments
-          ?.filter((appointment) => appointment.userId === user._id).length !== 0 ? (
+          ?.filter((appointment) => appointment.userId === user._id).length !==
+          0 ? (
           <>
             <h1 style={{ marginBottom: "1rem" }}>Mes rendez-vous</h1>
             <div className="table-container">

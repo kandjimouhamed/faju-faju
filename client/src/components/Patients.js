@@ -51,7 +51,7 @@ const useStyles = createStyles((theme) => ({
   },
   Table: {
     width: "100%",
-    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
       width: 600,
     },
   },

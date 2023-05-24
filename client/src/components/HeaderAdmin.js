@@ -21,8 +21,6 @@ import "../assets/styles/css/HeaderAdmin.css";
 import adminData from "../utils/adminData";
 import ListItem from "./ListItem";
 import userData from "../utils/userData";
-// import { useDisclosure } from '@mantine/hooks';
-// import { Drawer, Group, Button } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   Notification: {

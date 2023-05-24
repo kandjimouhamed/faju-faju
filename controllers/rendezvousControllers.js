@@ -9,7 +9,7 @@ const addRendezvous = async (req , res) => {
            
         })
         
-        res.status(200).json({data : rendezvous , message : "Rendez vous programmeé avec success."})
+        return res.status(200).json({data : rendezvous , message : "Rendez vous programmeé avec success."})
 
     } catch (error) {
         console.log(error);

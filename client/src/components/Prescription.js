@@ -50,7 +50,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: "100vh",
+    // height: "100vh",
   },
   header: {
     position: "sticky",
@@ -78,7 +78,7 @@ const useStyles = createStyles((theme) => ({
   },
   Table: {
     width: "100%",
-    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
       width: 600,
     },
   },

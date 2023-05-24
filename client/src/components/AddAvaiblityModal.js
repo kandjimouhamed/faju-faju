@@ -171,7 +171,8 @@ const AddAvaiblityModal = ({ opened, setOpened }) => {
                     <span className='modal-span'>Date</span>
                     <Grid>
                         <Grid.Col>
-                            <DatePicker placeholder='Date' {...form.getInputProps('date')}
+                            
+                            <DateInput placeholder='Date' {...form.getInputProps('date')}
                                 inputFormat="MM/DD/YYYY"
                                 labelFormat="MM/YYYY"
                              />
