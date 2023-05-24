@@ -219,7 +219,12 @@ const HeaderItem = () => {
             }} p="lg"> */}
           <List spacing="lg" size="md" center sx={{ listStyle: "none" }}>
             {isAdmin
-              ? adminData.map((data) => <ListItem key={data.to} {...data} />)
+              ? adminData.map((data) => <ListItem 
+              key={data.to} 
+              {...data}
+              setOpened={setOpened}
+              opened={opened}
+               />)
               : userData.map((data) => (
                   <ListItem
                     key={data.to}
