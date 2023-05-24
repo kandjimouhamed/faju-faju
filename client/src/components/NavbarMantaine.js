@@ -10,7 +10,7 @@ const useStyles = createStyles((theme) => ({
   Navbar : {
     display : "flex",
     width : "20%",
-    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
       display : "none"
     } 
   }

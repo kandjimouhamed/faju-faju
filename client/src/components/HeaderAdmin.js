@@ -26,13 +26,13 @@ import userData from "../utils/userData";
 
 const useStyles = createStyles((theme) => ({
   Notification: {
-    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
       display: "none",
     },
   },
   BtnRendezVous: {
     display : "flex",
-    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
       display: "none",
       backgroundColor : 'red'
     },
@@ -42,13 +42,13 @@ const useStyles = createStyles((theme) => ({
   },
   Burger : {
     display : 'flex',
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.sm})`]: {
       display: "none",
     },
   },
   Drawer : {
     display : 'block',
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.sm})`]: {
       display: "none",
     },
   }

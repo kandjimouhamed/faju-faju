@@ -25,7 +25,7 @@ const useStyles = createStyles((theme) => ({
     width : '80%',
     justifyContent : "end",
 
-    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
       width : '100%'
     },
     marginLeft : 'auto',
