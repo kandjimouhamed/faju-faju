@@ -11,11 +11,11 @@ const adminData = [
         label: "Dashboard",
         icon: <RiDashboardLine size={25} />
     },
-    {
-        to: 'appointements',
-        label: "Rendez-vous",
-        icon: <RiCalendarCheckLine size={25} />
-    },
+    // {
+    //     to: 'appointements',
+    //     label: "Rendez-vous",
+    //     icon: <RiCalendarCheckLine size={25} />
+    // },
     {
         to: 'calendar',
         label: "Mon agenda",
