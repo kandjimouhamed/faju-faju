@@ -15,6 +15,7 @@ import {
   addRendezvous,
   updateRendezvous,
 } from "../redux/services/rendezvousService";
+import { format } from 'date-fns';
 
 const useStyles = createStyles((theme) => ({
   input: {
@@ -31,12 +32,15 @@ function AddRendezvous({
   error,
   setError,
 }) {
+
+
   const { classes } = useStyles();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(rendezvous);
+
+
     if (
       rendezvous.nomCompletPatient === "" ||
       rendezvous.dateRendezvous === "" ||
@@ -124,15 +128,14 @@ function AddRendezvous({
         title={title}
       >
         <form onSubmit={handleSubmit}>
+
           <Input.Wrapper
             className={classes.input}
             id={"3"}
             label="Entrez votre Nom Complet"
             required
-            //  maw={320} mx="auto"
           >
             <Input
-              //   icon={<IconBrandTwitter size="1rem" />}
               value={rendezvous.nomCompletPatient}
               onChange={(e) =>
                 setRendezvous({
@@ -175,7 +178,6 @@ function AddRendezvous({
                 color: "transparent",
                 lineHeight: 'calc(2.25rem - 0.125rem)',
                 border: '0.0625rem solid #ced4da',
-                // appearance: 'none',
                 boxSizing: 'border-box',
                 fontSize:' 0.875rem',
                 width: '100%',
@@ -188,11 +190,10 @@ function AddRendezvous({
                 paddingLeft: 'calc(2.25rem / 3)',
                 paddingRight: '2.25rem',
                 borderRadius: '0.25rem',
-            }}
+              }}
               type="date"
               placeholder="date de rendez vous"
-              value={rendezvous.dateRendezvous}
-              name="dateRendezvous"
+              value={rendezvous._id ? format(new Date(rendezvous.dateRendezvous), 'yyyy-MM-dd') : rendezvous.dateRendezvous}
               onChange={(e) =>
                 setRendezvous({ ...rendezvous, dateRendezvous: e.target.value })
               }

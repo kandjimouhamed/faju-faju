@@ -41,10 +41,10 @@ const useStyles = createStyles((theme) => ({
     justifyContent: "space-between",
   },
   body: {
-    margin : "20px 0"
+    margin : "20px 15px"
   },
   signature: {
-    textDecoration: "overline",
+    textDecoration: "underline",
     fontWeight: "600",
     display: "flex",
     justifyContent: "center",
@@ -112,32 +112,32 @@ function DetailPrescription() {
           sx={{ boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.3)" }}
         >
           <Grid className={classes.Grid}>
-            <Grid.Col className={classes.GridCol} span={4}>
+            <Grid.Col className={classes.GridCol} span={12}>
+            <div className={classes.doctorName}>Mr. {medicin?.lastname}</div>
+              <div>Dentist</div>
               <div>
                 <div className={classes.colonneHeader}>
                   <ImPhone />
                   <div style={{ marginLeft: "10px" }}>{medicin?.phone}</div>
                 </div>
-                <div className={classes.colonneHeader}>
+                {/* <div className={classes.colonneHeader}>
                   <ImLocation2 />
                   <div style={{ marginLeft: "10px" }}>Keur Massar</div>
-                </div>
+                </div> */}
               </div>
             </Grid.Col>
-            <Grid.Col className={classes.GridCol} span={4}>
+            {/* <Grid.Col className={classes.GridCol} span={4}>
               <div className={classes.doctorName}>Mr. {medicin?.lastname}</div>
               <div>Dentist</div>
-            </Grid.Col>
+            </Grid.Col> */}
           </Grid>
           <Divider className={classes.Divider} size={7} />
-
-          <Title order={4}>Patient : </Title>
           <div>
             <Grid
               style={{
                 fontSize: "0.8rem",
                 fontWeight: "650",
-                margin: "5px 70px",
+                margin: "2px 15px",
               }}
               mt="sm"
             >

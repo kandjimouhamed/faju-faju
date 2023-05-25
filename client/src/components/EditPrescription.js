@@ -40,6 +40,12 @@ const useStyles = createStyles((theme) => ({
   input: {
     margin: "20px 0",
   },
+  ButtonAjoute : {
+    [`@media (max-width: ${theme.breakpoints.sm})`]: {
+      marginTop : '100px'
+    },
+
+  }
 }));
 
 function EditPrescription() {
@@ -137,8 +143,6 @@ function EditPrescription() {
             id={"3"}
             label="Selectionnez un patient"
             required
-            maw={320}
-            mx="auto"
           >
             <Select
               placeholder={`${prescription.dataPatient.firstname} ${prescription.dataPatient.lastname}`}
@@ -161,8 +165,6 @@ function EditPrescription() {
             id={"3"}
             label="Description du medecin"
             required
-            maw={320}
-            mx="auto"
           >
             <ReactQuill
               theme="snow"
@@ -185,6 +187,7 @@ function EditPrescription() {
             ) : null}
           </Input.Wrapper>
           <button
+          className={classes.ButtonAjoute}
             style={{ ...btnStyle, width: "100%", padding: "0.8rem" }}
             type="submit"
           >

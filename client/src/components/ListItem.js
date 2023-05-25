@@ -21,8 +21,6 @@ const ListItem = ({
     if (opened) {
       setOpened(false);
     }
-    // setOpened(false)
-    console.log("Hello");
   };
 
   return (
