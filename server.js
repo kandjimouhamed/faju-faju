@@ -61,3 +61,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port, () => console.log("The server is running on port : ", port))
+
+// "build": "CI=false react-scripts build",
