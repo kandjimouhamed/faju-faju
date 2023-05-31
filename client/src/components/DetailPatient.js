@@ -42,12 +42,21 @@ function DetailPatient() {
                   <h4>Informations du consultation </h4>
                   <Grid style={{ fontSize: '0.8rem', fontWeight: '700' }} mt="sm">
                     {
-                        statePatients?.data?.prescription.map((prescription) => (
+                      statePatients?.data?.prescription.length !== 0 ? (
+                        statePatients?.data?.prescription?.map((prescription) => (
                             <>
                                 <Grid.Col span={12} sm={12}>Date de consultation : {localFrFormat(prescription.createdAt)} <Badge color="pink"></Badge></Grid.Col>
                                 <Grid.Col span={12} sm={12}>Prescription: <Badge color="pink"></Badge></Grid.Col>
                             </>
                         ))
+                        
+                      ) : (
+                        <>
+                          <div style={{justifyContent : 'center' , alignItems : 'center' }}>
+                            <p>Aucun prescription</p>
+                          </div>
+                        </>
+                      )
                     }
                         {/* <Grid.Col span={12} sm={6}>Nom : <Badge color="pink"></Badge></Grid.Col>
                         <Grid.Col span={12} sm={6}>Email : <Badge color="pink"></Badge></Grid.Col>
