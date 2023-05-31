@@ -13,38 +13,14 @@ import {
 import { toast } from "react-hot-toast";
 
 // ? ################### STYLE MANTINE ############################
-const useStyles = createStyles((theme) => ({
-  // button: {
-  //   color: theme.white,
-  //   backgroundColor: theme.colors.blue[6],
-  //   border: 0,
-  //   borderRadius: theme.radius.md,
-  //   padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
-  //   cursor: 'pointer',
-  //   margin: theme.spacing.md,
-
-  //   // Use pseudo-classes just like you would in Sass
-  //   '&:hover': {
-  //     backgroundColor: theme.colors.blue[9],
-  //   },
-
-  //   '&:not(:first-of-type)': {
-  //     backgroundColor: theme.colors.violet[6],
-
-  //     // pseudo-classes can be nested
-  //     '&:hover': {
-  //       backgroundColor: theme.colors.violet[9],
-  //     },
-  //   },
-  // },
+const useStyles = createStyles((theme) => ({ 
   input: {
     margin: "20px 0",
   },
   ButtonAjoute : {
     [`@media (max-width: ${theme.breakpoints.sm})`]: {
       marginTop : '100px'
-    },
-
+    }
   }
 }));
 
@@ -130,7 +106,7 @@ function EditPrescription() {
   };
 
   const editorStyle = {
-    height: "350px",
+    height: "80vh"
   };
 
   return (
@@ -186,8 +162,8 @@ function EditPrescription() {
               </Alert>
             ) : null}
           </Input.Wrapper>
+          <div className={classes.ButtonAjoute}>
           <button
-          className={classes.ButtonAjoute}
             style={{ ...btnStyle, width: "100%", padding: "0.8rem" }}
             type="submit"
           >
@@ -197,6 +173,8 @@ function EditPrescription() {
                 <Loader color="white" variant="dots" />
               )}
           </button>
+
+          </div>
         </form>
       </Container>
     </div>
