@@ -1,8 +1,0 @@
-[[ redirects ]]
-from = "/*"
-to = "/index.html"
-status = 200
-
-[build]
-command = "npm run build"  # La commande de construction de votre projet
-publish = "faju/client"   # Le dossier à publier (le chemin relatif depuis la racine)

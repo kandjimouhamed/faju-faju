@@ -42,7 +42,7 @@ function DetailPatient() {
                   <h4>Informations du consultation </h4>
                   <Grid style={{ fontSize: '0.8rem', fontWeight: '700' }} mt="sm">
                     {
-                      statePatients?.data?.prescription.length !== 0 ? (
+                      statePatients?.data?.prescription.length !== 0 && statePatients?.data?.prescription ? (
                         statePatients?.data?.prescription?.map((prescription) => (
                             <>
                                 <Grid.Col span={12} sm={12}>Date de consultation : {localFrFormat(prescription.createdAt)} <Badge color="pink"></Badge></Grid.Col>
