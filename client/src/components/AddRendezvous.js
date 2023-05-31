@@ -81,40 +81,6 @@ function AddRendezvous({
       }
     }
 
-    // if(rendezvous.nomCompletPatient === "" || rendezvous.dateRendezvous ==="" || rendezvous.description==="") {
-    //   setError("Viellez remplire ce champ .")
-    // } else {
-    //   if(rendezvous._id) {
-    //     dispatch(updateRendezvous(rendezvous))
-    //     .then(() => {
-    //       setOpened(false)
-    //       toast('Rendez vous modifié avec success', {icon: '👏',});
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       toast('Error')
-    //     })
-
-    //   }
-    //   else {
-    //     try {
-    //         await instance.post("/rendezvous", rendezvous)
-    //         setOpened(false)
-    //         toast('Rendez vous ajoutée avec success', {icon: '👏',});
-    //         setRendezvous({
-    //           nomCompletPatient : "",
-    //           dateRendezvous : "",
-    //           description : "",
-
-    //       })
-
-    //     }
-    //     catch (err) {
-    //         console.log(err.response.data);
-    //         toast(err.response.data.error)
-    //     }
-    //   }
-    // }
   };
 
   return (

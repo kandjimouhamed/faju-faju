@@ -90,7 +90,7 @@ export default function Prescription() {
   const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
   const prescriptions = useSelector((state) => state.prescription);
-  const currentUser = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.user); 
 
   useEffect(() => {
     dispatch(getPatients());

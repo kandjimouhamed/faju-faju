@@ -16,11 +16,11 @@ const adminData = [
     //     label: "Rendez-vous",
     //     icon: <RiCalendarCheckLine size={25} />
     // },
-    {
-        to: 'calendar',
-        label: "Mon agenda",
-        icon: <BsPersonCheck size={25} />
-    },
+    // {
+    //     to: 'calendar',
+    //     label: "Mon agenda",
+    //     icon: <BsPersonCheck size={25} />
+    // },
     {
         to: 'prescription',
         label: "Préscription",
