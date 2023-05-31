@@ -55,12 +55,14 @@ function EditPrescription() {
   };
 
 
+  console.log(currentUser)
+  console.log(prescription)
   const handleSubmit = (e) => {
     e.preventDefault();
     const newPrescription = {
       ...prescription,
-      userId: currentUser._id,
     };
+    
 
     if (prescription.patientId === "" && prescription.description === "") {
       setError("Veillez remplire tous les champs.");

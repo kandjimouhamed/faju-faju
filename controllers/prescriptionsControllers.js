@@ -46,12 +46,15 @@ const updatePrescription = async (req , res) => {
     if(!findPrescription) return res.status(404).json("La prescription est introuvable")
 
     const findPatient = await UserModel.findOne({ _id: patientId })
+    console.log(findPatient)
+    console.log(req.body)
+ 
     if(!findPatient) res.status(404).json({message : "Patient improuvable."})
     
     try {
         const prescription = await prescriptionModel.findByIdAndUpdate(
             req.params.id , 
-            { patientId, userId , description , dataPatient : findPatient},
+            { patientId, description , dataPatient : findPatient},
             { new : true }
         );
         return res.status(200).json({data : prescription , message : 'Prescription modifié avec success.'})
