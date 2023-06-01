@@ -116,7 +116,9 @@ function AjoutPrescription() {
 
   // ! Foncion qui convertir le select en donnant value et label
   const optionItem = () => {
-    return patients.map((patient) => ({
+    return patients
+    .filter((patient) => patient.idMedecin === currentUser._id)
+    .map((patient) => ({
       value: patient._id,
       label: `${patient.firstname} ${patient.lastname}`,
     }));

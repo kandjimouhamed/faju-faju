@@ -54,9 +54,6 @@ function EditPrescription() {
     ],
   };
 
-
-  console.log(currentUser)
-  console.log(prescription)
   const handleSubmit = (e) => {
     e.preventDefault();
     const newPrescription = {
@@ -96,7 +93,9 @@ function EditPrescription() {
 
   // ! Foncion qui convertir le select en donnant value et label
   const optionItem = () => {
-    return patients.map((patient) => ({
+    return patients
+    .filter((patient) => patient.idMedecin === currentUser._id)
+    .map((patient) => ({
       value: patient._id,
       label: `${patient.firstname} ${patient.lastname}`,
     }));
