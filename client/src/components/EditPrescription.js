@@ -78,7 +78,7 @@ function EditPrescription() {
           });
           navigate("/dashboard/prescription");
         })
-        .catch((err) => {
+        .catch((err) =gi> {
           console.log(err);
           toast(err.data);
         });
