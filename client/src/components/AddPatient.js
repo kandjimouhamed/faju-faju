@@ -62,7 +62,6 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-
         if(patients.firstname === "" || patients.lastname ==="" || patients.phone==="") {
           setError("Viellez remplire ce champ .")
         } else {
@@ -115,10 +114,12 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
       title={title}
     >
     <form onSubmit={handleSubmit}>
-      <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre prénom" required maw={320} mx="auto">
-        <Input
+      {/* <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre prénom" required maw={320} mx="auto"> */}
+        <InputBase
         //   icon={<IconBrandTwitter size="1rem" />}
             value={patients.firstname}
+            label="Entrez votre prénom" 
+            type='text'
             onChange={(e) => setPatients({...patients , firstname : e.target.value})}
             placeholder="Prénom"
             rightSection={
@@ -136,11 +137,13 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             </Alert>
           )
         }
-      </Input.Wrapper>
-      <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre Nom" required maw={320} mx="auto">
-        <Input
+      {/* </Input.Wrapper> */}
+      {/* <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre Nom" required maw={320} mx="auto"> */}
+        <InputBase
         //   icon={<IconBrandTwitter size="1rem" />}
             value={patients.lastname}
+            label="Entrez votre Nom"
+            type = 'text'
             onChange={(e) => setPatients({...patients, lastname : e.target.value})}
             placeholder="Nom"
             rightSection={
@@ -158,10 +161,11 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             </Alert>
           )
         }
-      </Input.Wrapper>
-      <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre numéro de téléphone" required maw={320} mx="auto">
+      {/* </Input.Wrapper> */}
+      {/* <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre numéro de téléphone" required maw={320} mx="auto"> */}
         <InputBase 
             value={patients.phone}
+            label="Entrez votre numéro de téléphone"
             onChange={(e) => setPatients({...patients, phone : e.target.value})}
             placeholder="Téléphone" 
             component={IMaskInput} 
@@ -174,7 +178,7 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
             </Alert>
           )
         }
-      </Input.Wrapper>
+      {/* </Input.Wrapper> */}
 
       {/* <Input.Wrapper className={classes.input} id={'3'} label="Entrez votre email" required maw={320} mx="auto"> */}
         <InputBase
@@ -185,6 +189,13 @@ function AddPatient({opened , setOpened , title , patients , setPatients , error
           // icon={<IconAt />}
           placeholder="Email"
         />
+          {
+        error === "Viellez remplire ce champ ." && patients?.email === "" && (
+            <Alert icon={<IconAlertCircle size="1rem" />} color="red">
+              {error}
+            </Alert>
+          )
+        }
       {/* </Input.Wrapper> */}
       <button 
        style={{ ...btnStyle, width: '100%', padding: '0.8rem' }} type="submit">
