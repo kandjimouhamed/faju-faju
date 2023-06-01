@@ -6,8 +6,10 @@ const initialState = {
     loading : true,
     isSuccess : false,
     message : "",
-    // getRendezvousStatus : "",
-
+    getRendezvousStatus : "",
+    addRendezvousStatus : "",
+    updateRendezvousStatus : "",
+    deleteRendezvousStatus : ""
 }
 
 const rendezvousSlice = createSlice({
@@ -19,6 +21,9 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : true,
                 getRendezvousStatus : "pending",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : ""
             }
         },
 
@@ -27,8 +32,11 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : payload.data,
+                data : [...state.data , payload.data ],
                 getRendezvousStatus : "success",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : ""
             }
         },
 
@@ -39,12 +47,19 @@ const rendezvousSlice = createSlice({
                 isSuccess : false,
                 message : payload,
                 getRendezvousStatus : "rejected",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : ""
             }
         },
         [addRendezvous.pending] : (state) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "pending",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : ""
             }
         },
 
@@ -53,7 +68,12 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : [...state.data , payload.data]
+                data : [...state.data , payload.data ],
+                getRendezvousStatus : "",
+                addRendezvousStatus : "success",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : ""
+               
             }
         },
 
@@ -62,13 +82,21 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "rejected",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : ""
             }
         },
         [deleteRendezvous.pending] : (state) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : "pending"
             }
         },
 
@@ -78,7 +106,12 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : deleteItem
+                data : deleteItem,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : "success"
+                
             }
         },
 
@@ -87,13 +120,22 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : "rejected"
             }
         },
         [updateRendezvous.pending] : (state) => {
             return {
                 ...state,
-                loading : true
+                loading : true,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "",
+                deleteRendezvousStatus : "pending"
+                
             }
         },
 
@@ -103,7 +145,11 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : true,
-                data : updateItem
+                data : updateItem,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "success",
+                deleteRendezvousStatus : ""
             }
         },
 
@@ -112,10 +158,15 @@ const rendezvousSlice = createSlice({
                 ...state,
                 loading : false,
                 isSuccess : false,
-                message : payload
+                message : payload,
+                getRendezvousStatus : "",
+                addRendezvousStatus : "",
+                updateRendezvousStatus : "rejected",
+                deleteRendezvousStatus : "",
+            }
             }
         }
-    }
-})
+    },
+)
 
 export default rendezvousSlice.reducer

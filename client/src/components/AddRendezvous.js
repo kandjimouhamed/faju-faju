@@ -137,7 +137,6 @@ function AddRendezvous({
           >
             <div>
             <input
-
               style={{
                 fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji',
                 height: "2.25rem",

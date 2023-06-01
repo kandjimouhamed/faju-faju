@@ -1,12 +1,27 @@
+const UserModel = require("../model/UserModel")
 const RendezvousModel = require("../model/rendezvousModel")
 const addRendezvous = async (req , res) => {
+     // const userId = req.params.id
+     const {patientId  , userId  } = req.body
+
+
+     // ! Verifier si utilisateur qui a effectué la requéte existe
+     const user = await UserModel.findById(userId)
+     if(!user) res.status(404).json({message : "L'utilisateur est introuvable."})
+ 
+     const findPatient = await UserModel.findOne({ _id: patientId })
+     if(!findPatient) res.status(404).json({message : "Patient improuvable."})
     try {
-        const {nomCompletPatient, dateRendezvous,description} = req.body
+        const {nomCompletPatient, dateRendezvous,description, patientId  , userId} = req.body
         console.log(req.body);
 
         const rendezvous = await RendezvousModel.create({
-            nomCompletPatient, dateRendezvous,description
-           
+            nomCompletPatient, 
+            dateRendezvous,
+            description,
+            patientId,
+            userId,
+            dataPatient: findPatient
         })
         
         return res.status(200).json({data : rendezvous , message : "Rendez vous programmeé avec success."})

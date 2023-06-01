@@ -42,7 +42,7 @@ export default function RendezVous() {
   // console.log(stateRendezvous)
 
   useEffect(() => {
-    dispatch(getRendezvous());
+    dispatch(getRendezvous());  
   }, [dispatch]);
   const openDeleteModal = (rdv) =>
     openConfirmModal({
