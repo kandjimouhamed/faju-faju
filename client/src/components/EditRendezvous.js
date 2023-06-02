@@ -45,7 +45,6 @@ function EditRendezvous() {
       ...rendezvous,
     };
     
-    console.log(rendezVous);
 
     if (rendezvous.patientId === "" && rendezvous.description === "" && rendezvous.dateRendezvous === "") {
         setError("Veillez remplire tous les champs.");
@@ -93,7 +92,6 @@ function EditRendezvous() {
 
   // ? #################### RECUPERER LE PATIENT SELECTIONNER ############################
   const handlePatientChange = (value) => {
-    console.log(value);
     setRendezvous({ ...rendezvous, patientId: value });
   };
 
