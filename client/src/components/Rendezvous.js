@@ -93,7 +93,7 @@ import {
     const rendezVous = useSelector((state) => state.rendezvous);
     const currentUser = useSelector((state) => state.user); 
     
-    console.log(rendezVous);
+    
     useEffect(() => {
       dispatch(getPatients());
       dispatch(getRendezvous());
