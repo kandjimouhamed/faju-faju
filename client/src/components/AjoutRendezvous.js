@@ -263,7 +263,7 @@ function AjoutRendezvous() {
             style={{ ...btnStyle, width: "100%", padding: "0.8rem" , }}
             type="submit"
           >
-            {rendezvous.addPrescriptionStatus !== "pending" ? (
+            {rendezVous.addPrescriptionStatus !== "pending" ? (
                 "Ajouter"
               ) : (
                 <Loader color="white" variant="dots" />
