@@ -41,16 +41,19 @@ const getRendezvous = async (req , res) => {
     }
 }
 const updateRendezvous = async (req , res) => {
-    const {nomCompletPatient, dateRendezvous, description} = req.body;
+    const {nomCompletPatient, dateRendezvous, description, patientId} = req.body;
     // const Id = req.params.id
-    console.log(req.body)
+ 
+    const userId = req.params.id
 
+    const findPatient = await UserModel.findOne({ _id: patientId })
     const rv = await RendezvousModel.findById(req.params.id);
+    if(!findPatient) res.status(404).json({message : "Patient improuvable."})
     if(!rv) return res.status(404).json("La rendez vous est introuvable")
     try {
         const rendezvous = await RendezvousModel.findByIdAndUpdate(
             req.params.id , 
-            { nomCompletPatient, dateRendezvous, description },
+            { nomCompletPatient, dateRendezvous, description,patientId, dataPatient : findPatient },
             { new : true }
         );
         return res.status(200).json({data : rendezvous , message : 'rendez vous modifié avec success.'})

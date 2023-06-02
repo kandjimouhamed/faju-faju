@@ -63,6 +63,7 @@ function EditRendezvous() {
               description: "",
               dateRendezvous: "",
               patients: "",
+              dataPatient:{}
             });
             navigate("/dashboard/rendezvous");
           })
