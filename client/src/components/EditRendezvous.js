@@ -33,24 +33,11 @@ function EditRendezvous() {
   const patients = useSelector((state) => state.patients?.data);
   const rendezVous = useSelector((state) => state.rendezvous);
   const rv = rendezVous?.data.find((item) => item._id === id);
+
   const [rendezvous, setRendezvous] = useState({
     ...rv,
   });
-  const modules = {
-    toolbar: [
-      [{ headers: [1, 2, 3, 4, 5, 6, false] }],
-      [{ font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-    ],
-  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,6 +45,7 @@ function EditRendezvous() {
       ...rendezvous,
     };
     
+    console.log(rendezVous);
 
     if (rendezvous.patientId === "" && rendezvous.description === "" && rendezvous.dateRendezvous === "") {
         setError("Veillez remplire tous les champs.");
@@ -104,12 +92,10 @@ function EditRendezvous() {
 
   // ? #################### RECUPERER LE PATIENT SELECTIONNER ############################
   const handlePatientChange = (value) => {
+    console.log(value);
     setRendezvous({ ...rendezvous, patientId: value });
   };
 
-  const editorStyle = {
-    height: "80vh"
-  };
 
   return (
     <div className="table-container">
