@@ -9,10 +9,10 @@ const busyTimeRoutes = require('./routes/busyTimesRoute')
 const prescriptionRoutes = require('./routes/prescriptionRoutes')
 const patientsRoutes = require('./routes/patientsRoutes')
 const rendezvousRoutes = require('./routes/rendezvousRoutes')
+const smsRouter = require('./routes/smsRouter')
 const cors = require('cors')
 const connectToMongoDB = require('./config/db')
-// const { getPrescriptions } = require('./controllers/prescriptionsControllers')
-// const passport = require('passport')
+
 
 const app = express()
 // app.use(session({ secret: "cats" }))
@@ -47,6 +47,10 @@ app.use('/api/patient' , patientsRoutes)
 app.use('/api/rendezvous' , rendezvousRoutes)
 app.use('/api/prescription' , prescriptionRoutes )
 app.use('/api/patient' , patientsRoutes)
+
+app.use('/api/sms' , smsRouter)
+
+
 // serve frontend
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, './client/build')))

@@ -4,6 +4,7 @@ import { Check, Trash } from 'tabler-icons-react'
 import { useSelector } from 'react-redux';
 import { convertDate, getTodayDate } from '../utils/functions/dates';
 import { IconArrowMoveUp } from '@tabler/icons';
+import SmsSendTest from './SmsSendTest';
 
 const Dashboard = () => {
     const allUnAvaiblities = useSelector(state => state.unavaiblities)
@@ -45,6 +46,7 @@ const Dashboard = () => {
     }, [])
 
     return (
+        <>
         <Grid>
             <Grid.Col sm={6} md={4}>
                 <Box
@@ -101,6 +103,11 @@ const Dashboard = () => {
                 </Box>
             </Grid.Col>
         </Grid>
+
+        <div>
+            <SmsSendTest />
+        </div>
+        </>
     )
 }
 
