@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Loader } from '@mantine/core';
 import logo from '../assets/img/illustration-2.png'
+import logoFaju from '../assets/img/logoFaju.png'
+// import {} from '../a'
 import { Link, useNavigate } from 'react-router-dom';
 // import GoogleButton from './GoogleButton';
 import instance from '../axios/globalInstance'
@@ -64,6 +66,9 @@ const Login = () => {
                 <img src={logo} alt="Appointement" />
             </div>
             <div style={{marginTop: '3rem'}} className='form-right'>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <img src={logoFaju} alt="logo de Faju" style={{width: '80px', height: '80px'}} />
+                </div>
                 <h1>Connexion</h1>
                 <p>Connectez-vous à votre compte</p>
                 <span>Vous n'avez pas de compte ? <Link to="/signup">Inscrivez-vous</Link></span>

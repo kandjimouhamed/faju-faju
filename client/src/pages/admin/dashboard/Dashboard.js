@@ -21,6 +21,8 @@ import EditPrescription from "../../../components/EditPrescription";
 import DetailPrescription from "../../../components/DetailPrescription";
 import AjoutRendezvous from "../../../components/AjoutRendezvous";
 import EditRendezvous from "../../../components/EditRendezvous";
+import DetailRendezvous from "../../../components/DetailRendezvous";
+
 
 const useStyles = createStyles((theme) => ({
   Dashboard : {
@@ -66,14 +68,19 @@ const Dashboard = () => {
             <Route path="/avaiblities" element={<Avaiblities />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
+
+                  {/*############ Prescription ############*/}
             <Route path="/prescription" element={<Prescription/>} />
             <Route path="/addPrescription" element={<AjoutPrescription/>} />
             <Route path="/Prescription/:id" element={<EditPrescription/>} />
             <Route path="/detail-prescription/:id" element={<DetailPrescription/>} />
+                  {/*############ Rendez-vous ############*/}
             {/* <Route path="/rendezvous" element={<RendezVous/>} /> */}
             <Route path="/rendezvous" element={<Rendezvous/>} />
             <Route path="/addRendezvous" element={<AjoutRendezvous/>} />
             <Route path="/rendezvous/:id" element={<EditRendezvous/>} />
+            <Route path="/detail-rendezvous/:id" element={<DetailRendezvous/>} />
+                  {/*############ Patient ############*/}
             <Route path="/patient" element={<Patients/>} />
             <Route path="/detail-patient/:id" element={<DetailPatient/>} />
           </Routes>
