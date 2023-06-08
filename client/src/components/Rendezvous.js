@@ -189,15 +189,15 @@ import {
                                 }
                               />
                             </Grid.Col>
-                            {/* <Grid.Col span={2}>
+                            <Grid.Col span={2}>
                               <GrFormView
                                 onClick={() =>
                                   navigate(
-                                    `/dashboard/detail-prescription/${rv?._id}`
+                                    `/dashboard/detail-rendezvous/${rv?._id}`
                                   )
                                 }
                               />
-                            </Grid.Col> */}
+                            </Grid.Col>
                           </Grid>
                         </td>
                       </tr>

@@ -33,9 +33,10 @@ const ListItem = ({
                 backgroundColor: isAdmin ? "#DB3C4E" : "#3F73D7",
                 borderRadius: "5px",
                 color: "white",
-                width: "150%",
+                width: "100%",
+                padding: '10 50px'
               }
-            : { width: "150%" }
+            : { width: "100%" }
         }
         className={className}
         to={to}

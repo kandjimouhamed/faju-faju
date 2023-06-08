@@ -17,7 +17,8 @@ const signup = async (req, res) => {
             phone: req.body.phone,
             email: req.body.email,
             password: req.body.password,
-            role: "client"
+            role: "admin"
+            // role: "client"
         }
         // console.log(user)
         const { email } = user

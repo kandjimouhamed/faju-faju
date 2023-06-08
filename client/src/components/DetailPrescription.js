@@ -68,7 +68,7 @@ function DetailPrescription() {
   );
   //   console.log(prescription);
   //   console.log(medicins);
-  //   console.log(medicin);
+    console.log(medicin);
 
   useEffect(() => {
     dispatch(getPrescription());
